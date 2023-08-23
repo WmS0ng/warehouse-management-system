@@ -7,10 +7,10 @@ import org.springframework.context.annotation.Configuration;
 import java.util.Properties;
 
 /**
- * 验证码工具kaptcha的配置类
+ * 验证码工具Kaptcha的配置类
  */
 @Configuration
-public class CaptchaConfig {
+public class KaptchaConfig {
 
     /**
      * 配置Producer接口的实现类DefaultKaptcha的bean对象,该对象用于生成验证码图片;
