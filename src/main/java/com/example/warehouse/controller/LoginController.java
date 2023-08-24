@@ -27,13 +27,10 @@ public class LoginController {
     // 注入DefaultKaptcha物bean对象 -- 生成验证码图片
     @Autowired
     private Producer producer;
-
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
-
     @Autowired
     private UserService userService;
-
     @Autowired
     private TokenUtils tokenUtils;
 
@@ -80,6 +77,7 @@ public class LoginController {
      */
     @RequestMapping("/login")
     public Result login(@RequestBody LoginUser loginUser) {
+
         // 验证码不正确
         if (!Boolean.TRUE.equals(stringRedisTemplate.hasKey(loginUser.getVerificationCode()))) {
             return Result.err(Result.CODE_ERR_BUSINESS, "验证码不正确！");
@@ -103,6 +101,7 @@ public class LoginController {
         // 生成jwt token，并保存到Redis
         CurrentUser currentUser = new CurrentUser(user.getUserId(), user.getUserCode(), user.getUserName());
         String token = tokenUtils.loginSign(currentUser, userPwd);
+
         // 想客户端响应jwt token1
         return Result.ok("登陆成功！", token);
     }

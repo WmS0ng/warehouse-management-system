@@ -13,7 +13,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
-    // 根据账号查询用户的业务方法
     @Override
     public User selectUserByCode(String userCode) {
         return userMapper.selectUserByCode(userCode);
