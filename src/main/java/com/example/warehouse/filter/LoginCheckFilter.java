@@ -42,6 +42,7 @@ public class LoginCheckFilter implements Filter {
         // redis中存在该请求携带的token，放行
         if (StringUtils.hasText(token) && Boolean.TRUE.equals(stringRedisTemplate.hasKey(token))) {
             chain.doFilter(request, response);
+            return;
         }
         // redis中不存在该请求携带的token，拦截
         Result result = Result.err(Result.CODE_ERR_UNLOGINED, "您尚未登陆");

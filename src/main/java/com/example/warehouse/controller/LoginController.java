@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -104,5 +105,16 @@ public class LoginController {
 
         // 想客户端响应jwt token1
         return Result.ok("登陆成功！", token);
+    }
+
+    /**
+     * 获取当前登陆信息的url接口
+     */
+    @RequestMapping("/curr-user")
+    public Result currentUser(@RequestHeader(WarehouseConstants.HEADER_TOKEN_NAME) String token) {
+        // 解析token拿到封装了当前登陆用户信息的CurrentUser对象
+        CurrentUser currentUser = tokenUtils.getCurrentUser(token);
+        // 响应给前端
+        return Result.ok(currentUser);
     }
 }
