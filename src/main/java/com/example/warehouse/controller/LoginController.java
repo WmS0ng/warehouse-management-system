@@ -1,7 +1,7 @@
 package com.example.warehouse.controller;
 
 import com.example.warehouse.entity.User;
-import com.example.warehouse.entity.dto.AuthDto;
+import com.example.warehouse.entity.dto.AuthTree;
 import com.example.warehouse.entity.dto.CurrentUser;
 import com.example.warehouse.entity.dto.LoginUser;
 import com.example.warehouse.result.Result;
@@ -131,7 +131,7 @@ public class LoginController {
         // 从token中拿到当前用户的id
         int userId = tokenUtils.getCurrentUser(token).getUserId();
         // 查询树形权限菜单并返回
-        List<AuthDto> authTree = authService.selectAuthTreeByUid(userId);
+        List<AuthTree> authTree = authService.selectAuthTreeByUid(userId);
         return Result.ok(authTree);
     }
 

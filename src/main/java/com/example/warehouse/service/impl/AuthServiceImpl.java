@@ -1,7 +1,7 @@
 package com.example.warehouse.service.impl;
 
 import com.alibaba.fastjson2.JSON;
-import com.example.warehouse.entity.dto.AuthDto;
+import com.example.warehouse.entity.dto.AuthTree;
 import com.example.warehouse.mapper.AuthMapper;
 import com.example.warehouse.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,34 +23,34 @@ public class AuthServiceImpl implements AuthService {
      * 查询用户菜单树
      */
     @Override
-    public List<AuthDto> selectAuthTreeByUid(Integer userId) {
+    public List<AuthTree> selectAuthTreeByUid(Integer userId) {
         // 先从redis中查找
         String authTreeJson = stringRedisTemplate.opsForValue().get("authTree" + userId);
         if (StringUtils.hasText(authTreeJson)) {
-            return JSON.parseArray(authTreeJson, AuthDto.class);
+            return JSON.parseArray(authTreeJson, AuthTree.class);
         }
         // redis中不存在在从mysql中查找
-        List<AuthDto> authList = authMapper.findAuthListByUid(userId);
+        List<AuthTree> authList = authMapper.findAuthListByUid(userId);
         // 将查找出来的authList转换成authTree
-        List<AuthDto> authTree = allAuthListToAuthTreeList(authList, 0);
+        List<AuthTree> authTree = allAuthListToAuthTreeList(authList, 0);
         // 存入redis中一份，方便下次查询
         stringRedisTemplate.opsForValue().set("authTree" + userId, JSON.toJSONString(authTree));
         return authTree;
     }
 
 
-    private List<AuthDto> allAuthListToAuthTreeList(List<AuthDto> authList, Integer pid) {
+    private List<AuthTree> allAuthListToAuthTreeList(List<AuthTree> authList, Integer pid) {
         // 查询所有一级菜单
-        List<AuthDto> firstLevelAuthList = new ArrayList<>();
-        for (AuthDto authDto : authList) {
-            if (authDto.getParentId().equals(pid)) {
-                firstLevelAuthList.add(authDto);
+        List<AuthTree> firstLevelAuthList = new ArrayList<>();
+        for (AuthTree authTree : authList) {
+            if (authTree.getParentId().equals(pid)) {
+                firstLevelAuthList.add(authTree);
             }
         }
 
         // 拿到每个一级菜单的所有二级菜单
-        for (AuthDto firstAuth : firstLevelAuthList) {
-            List<AuthDto> secondLevelAuthList = allAuthListToAuthTreeList(authList, firstAuth.getAuthId());
+        for (AuthTree firstAuth : firstLevelAuthList) {
+            List<AuthTree> secondLevelAuthList = allAuthListToAuthTreeList(authList, firstAuth.getAuthId());
             firstAuth.setChildAuth(secondLevelAuthList);
         }
 

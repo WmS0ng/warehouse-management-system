@@ -1,6 +1,6 @@
 package com.example.warehouse.mapper;
 
-import com.example.warehouse.entity.dto.AuthDto;
+import com.example.warehouse.entity.dto.AuthTree;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import java.util.List;
  * @Entity com.example.warehouse.entity.Auth
  */
 public interface AuthMapper {
-    List<AuthDto> findAuthListByUid(Integer userId);
+    List<AuthTree> findAuthListByUid(Integer userId);
 }
 
 

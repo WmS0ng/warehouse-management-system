@@ -8,7 +8,7 @@ import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class AuthDto extends Auth {
+public class AuthTree extends Auth {
     // 存放当前菜单下的所有子集菜单
-    private List<AuthDto> childAuth;
+    private List<AuthTree> childAuth;
 }
