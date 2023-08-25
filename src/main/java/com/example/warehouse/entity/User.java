@@ -35,5 +35,6 @@ public class User {
 
     private Date updateTime;// 修改时间
 
+    // 追加属性
     private String getCode;
 }
