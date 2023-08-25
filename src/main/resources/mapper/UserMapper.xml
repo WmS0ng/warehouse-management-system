@@ -3,6 +3,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.warehouse.mapper.UserMapper">
+    <!-- 插入用户 -->
+    <insert id="insertUser">
+        insert into user_info
+        values (null, #{userCode}, #{userName}, #{userPwd}, null, 0, 0, #{createBy}, now(), null, null)
+    </insert>
     <!-- 根据账号查询用户信息的方法 -->
     <select id="selectUserByCode" resultType="user">
         select *

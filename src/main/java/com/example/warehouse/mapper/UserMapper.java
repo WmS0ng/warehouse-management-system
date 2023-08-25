@@ -24,4 +24,9 @@ public interface UserMapper {
      * 分页查询用户
      */
     List<User> selectUserList(@Param("page") Page page, @Param("user") User user);
+
+    /**
+     * 添加用户
+     */
+    int insertUser(User user);
 }
