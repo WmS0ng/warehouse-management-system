@@ -23,4 +23,9 @@ public interface UserService {
      * 插入用户
      */
     Result insertUser(User user);
+
+    /**
+     * 启用或禁用用户
+     */
+    Result updateState(User user);
 }

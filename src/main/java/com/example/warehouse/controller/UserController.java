@@ -51,6 +51,7 @@ public class UserController {
      */
     @RequestMapping("/updateState")
     public Result updateUserState(@RequestBody User user) {
-
+        // 执行任务
+        return userService.updateState(user);
     }
 }

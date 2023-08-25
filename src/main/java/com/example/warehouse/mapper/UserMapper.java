@@ -29,4 +29,9 @@ public interface UserMapper {
      * 添加用户
      */
     int insertUser(User user);
+
+    /**
+     * 根据用户id修改用户状态
+     */
+    int updateStateByUid(@Param("userId") Integer userId, @Param("userState") String userState);
 }

@@ -8,6 +8,12 @@
         insert into user_info
         values (null, #{userCode}, #{userName}, #{userPwd}, null, 0, 0, #{createBy}, now(), null, null)
     </insert>
+    <!-- 根据用户id修改用户状态 -->
+    <update id="updateStateByUid">
+        update user_info
+        set user_state = #{userState}
+        where user_id = #{userId}
+    </update>
     <!-- 根据账号查询用户信息的方法 -->
     <select id="selectUserByCode" resultType="user">
         select *
@@ -15,7 +21,7 @@
         where user_code = #{user_code}
           and is_delete = 0
     </select>
-
+    <!-- 查总用户数量 -->
     <select id="selectUserRowCount" resultType="java.lang.Integer">
         select count(*)
         from user_info
@@ -33,6 +39,7 @@
             and is_delete = 0
         </where>
     </select>
+    <!-- 查询用户列表 -->
     <select id="selectUserList" resultType="com.example.warehouse.entity.User">
         select t1.*, t2.user_code get_code
         from user_info t1, user_info t2
