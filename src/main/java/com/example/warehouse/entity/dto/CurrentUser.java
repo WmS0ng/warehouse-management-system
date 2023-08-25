@@ -1,4 +1,4 @@
-package com.example.warehouse.entity;
+package com.example.warehouse.entity.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,9 +14,9 @@ import lombok.ToString;
 @ToString
 public class CurrentUser {
 
-    private int userId;//用户id
+    private int userId;// 用户id
 
-    private String userCode;//用户名
+    private String userCode;// 用户名
 
-    private String userName;//真实姓名
+    private String userName;// 真实姓名
 }

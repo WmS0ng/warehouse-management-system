@@ -1,9 +1,11 @@
 package com.example.warehouse.controller;
 
-import com.example.warehouse.entity.CurrentUser;
-import com.example.warehouse.entity.LoginUser;
 import com.example.warehouse.entity.User;
+import com.example.warehouse.entity.dto.AuthDto;
+import com.example.warehouse.entity.dto.CurrentUser;
+import com.example.warehouse.entity.dto.LoginUser;
 import com.example.warehouse.result.Result;
+import com.example.warehouse.service.AuthService;
 import com.example.warehouse.service.UserService;
 import com.example.warehouse.utils.DigestUtil;
 import com.example.warehouse.utils.TokenUtils;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @RestController
@@ -34,6 +37,8 @@ public class LoginController {
     private UserService userService;
     @Autowired
     private TokenUtils tokenUtils;
+    @Autowired
+    private AuthService authService;
 
     /**
      * 生成验证码图片的url接口
@@ -103,7 +108,7 @@ public class LoginController {
         CurrentUser currentUser = new CurrentUser(user.getUserId(), user.getUserCode(), user.getUserName());
         String token = tokenUtils.loginSign(currentUser, userPwd);
 
-        // 想客户端响应jwt token1
+        // 向客户端响应jwt token
         return Result.ok("登陆成功！", token);
     }
 
@@ -116,5 +121,27 @@ public class LoginController {
         CurrentUser currentUser = tokenUtils.getCurrentUser(token);
         // 响应给前端
         return Result.ok(currentUser);
+    }
+
+    /**
+     * 加载用户权限菜单树的url接口/user/auth-list
+     */
+    @RequestMapping("/user/auth-list")
+    public Result loadAuthTree(@RequestHeader(WarehouseConstants.HEADER_TOKEN_NAME) String token) {
+        // 从token中拿到当前用户的id
+        int userId = tokenUtils.getCurrentUser(token).getUserId();
+        // 查询树形权限菜单并返回
+        List<AuthDto> authTree = authService.selectAuthTreeByUid(userId);
+        return Result.ok(authTree);
+    }
+
+    /**
+     * 登出的url接口/logout
+     */
+    @RequestMapping("/logout")
+    public Result logout(@RequestHeader(WarehouseConstants.HEADER_TOKEN_NAME) String token) {
+        // 从redis删除token的键
+        stringRedisTemplate.delete(token);
+        return Result.ok("退出系统！");
     }
 }
