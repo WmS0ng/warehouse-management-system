@@ -32,7 +32,7 @@ public class UserController {
      */
     @RequestMapping("/user-list")
     public Result userList(Page page, User user) {
-        page = userService.selectUserList(page, user);
+        page = userService.selectUserPage(page, user);
 
         return Result.ok(page);
     }

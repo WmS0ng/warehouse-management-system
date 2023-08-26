@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public Page selectUserList(Page page, User user) {
+    public Page selectUserPage(Page page, User user) {
         // 查询总用户数量
         Integer count = userMapper.selectUserRowCount(user);
         // 分页查询

@@ -20,7 +20,7 @@ public interface UserService {
     /**
      * 分页查询用户
      */
-    Page selectUserList(Page page, User user);
+    Page selectUserPage(Page page, User user);
 
     /**
      * 插入用户

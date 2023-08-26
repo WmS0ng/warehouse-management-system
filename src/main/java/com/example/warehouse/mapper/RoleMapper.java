@@ -1,6 +1,8 @@
 package com.example.warehouse.mapper;
 
 import com.example.warehouse.entity.Role;
+import com.example.warehouse.page.Page;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -26,6 +28,16 @@ public interface RoleMapper {
      * 根据角色名查询角色id的方法
      */
     Integer selectRoleIdByName(String roleName);
+
+    /**
+     * 查询所有角色行数
+     */
+    Integer selectRoleRowCount(Role role);
+
+    /**
+     * 分页查询角色
+     */
+    List<Role> selectRolePage(@Param("page") Page page, @Param("role") Role role);
 }
 
 

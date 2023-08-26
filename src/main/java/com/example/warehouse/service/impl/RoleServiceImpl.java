@@ -2,11 +2,13 @@ package com.example.warehouse.service.impl;
 
 import com.example.warehouse.entity.Role;
 import com.example.warehouse.mapper.RoleMapper;
+import com.example.warehouse.page.Page;
 import com.example.warehouse.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -34,5 +36,18 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public List<Role> selectRoleListByUid(Integer userId) {
         return roleMapper.selectRoleListByUid(userId);
+    }
+
+    /**
+     * 角色的分页查询
+     */
+    @Override
+    @Transactional
+    public Page selectRolePage(Page page, Role role) {
+        Integer count = roleMapper.selectRoleRowCount(role);
+        List<Role> roleList = roleMapper.selectRolePage(page, role);
+        page.setTotalNum(count);
+        page.setResultList(roleList);
+        return page;
     }
 }

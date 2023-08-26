@@ -11,7 +11,6 @@ import java.util.Date;
  */
 @Data
 public class Role implements Serializable {
-
     @Serial
     private static final long serialVersionUID = 1L;
     private Integer roleId;
@@ -23,5 +22,6 @@ public class Role implements Serializable {
     private Date createTime;
     private Integer updateBy;
     private Date updateTime;
-
+    // 追加属性
+    private String getCode;
 }
