@@ -1,7 +1,7 @@
 package com.example.warehouse.service.impl;
 
 import com.alibaba.fastjson2.JSON;
-import com.example.warehouse.entity.AuthTree;
+import com.example.warehouse.dto.AuthTree;
 import com.example.warehouse.mapper.AuthMapper;
 import com.example.warehouse.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;

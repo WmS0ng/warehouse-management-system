@@ -1,6 +1,6 @@
 package com.example.warehouse.service;
 
-import com.example.warehouse.entity.AuthTree;
+import com.example.warehouse.dto.AuthTree;
 
 import java.util.List;
 

@@ -1,5 +1,6 @@
-package com.example.warehouse.entity;
+package com.example.warehouse.dto;
 
+import com.example.warehouse.entity.Auth;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

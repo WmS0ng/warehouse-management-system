@@ -17,4 +17,9 @@
         where #{userId} = t1.user_id
           and t1.role_id = t2.role_id
     </select>
+    <select id="selectRoleIdByName" resultType="java.lang.Integer">
+        select role_id
+        from role
+        where #{roleName} = role_name
+    </select>
 </mapper>

@@ -1,8 +1,8 @@
 package com.example.warehouse.controller;
 
-import com.example.warehouse.entity.AuthTree;
-import com.example.warehouse.entity.CurrentUser;
-import com.example.warehouse.entity.LoginUser;
+import com.example.warehouse.dto.AuthTree;
+import com.example.warehouse.dto.CurrentUser;
+import com.example.warehouse.dto.LoginUser;
 import com.example.warehouse.entity.User;
 import com.example.warehouse.result.Result;
 import com.example.warehouse.service.AuthService;

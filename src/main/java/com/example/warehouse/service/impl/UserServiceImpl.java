@@ -1,13 +1,18 @@
 package com.example.warehouse.service.impl;
 
+import com.example.warehouse.dto.AssignRoleDto;
 import com.example.warehouse.entity.User;
+import com.example.warehouse.entity.UserRole;
+import com.example.warehouse.mapper.RoleMapper;
 import com.example.warehouse.mapper.UserMapper;
+import com.example.warehouse.mapper.UserRoleMapper;
 import com.example.warehouse.page.Page;
 import com.example.warehouse.result.Result;
 import com.example.warehouse.service.UserService;
 import com.example.warehouse.utils.DigestUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,6 +22,10 @@ public class UserServiceImpl implements UserService {
     // 注入UserMapper
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private RoleMapper roleMapper;
+    @Autowired
+    private UserRoleMapper userRoleMapper;
 
     @Override
     public User selectUserByCode(String userCode) {
@@ -24,6 +33,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public Page selectUserList(Page page, User user) {
         // 查询总用户数量
         Integer count = userMapper.selectUserRowCount(user);
@@ -69,5 +79,23 @@ public class UserServiceImpl implements UserService {
         }
 
         return Result.err(Result.CODE_ERR_BUSINESS, "启用或禁用失败！");
+    }
+
+
+    /**
+     * 给用户分配角色
+     */
+    @Override
+    @Transactional // 事物处理
+    public void assignRole(AssignRoleDto assignRoleDto) {
+        userRoleMapper.deleteUserRoleByUid(assignRoleDto.getUserId());
+        List<String> roleNameList = assignRoleDto.getRoleCheckList();
+        for (String roleName : roleNameList) {
+            Integer roleId = roleMapper.selectRoleIdByName(roleName);
+            UserRole userRole = new UserRole();
+            userRole.setUserId(assignRoleDto.getUserId());
+            userRole.setRoleId(roleId);
+            userRoleMapper.insertUserRole(userRole);
+        }
     }
 }

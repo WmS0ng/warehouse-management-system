@@ -1,6 +1,7 @@
 package com.example.warehouse.service;
 
 
+import com.example.warehouse.dto.AssignRoleDto;
 import com.example.warehouse.entity.User;
 import com.example.warehouse.page.Page;
 import com.example.warehouse.result.Result;
@@ -28,4 +29,9 @@ public interface UserService {
      * 启用或禁用用户
      */
     Result updateState(User user);
+
+    /**
+     * 给用户分配角色的业务方法
+     */
+    void assignRole(AssignRoleDto assignRoleDto);
 }

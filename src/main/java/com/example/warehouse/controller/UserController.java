@@ -1,7 +1,8 @@
 package com.example.warehouse.controller;
 
 
-import com.example.warehouse.entity.CurrentUser;
+import com.example.warehouse.dto.AssignRoleDto;
+import com.example.warehouse.dto.CurrentUser;
 import com.example.warehouse.entity.Role;
 import com.example.warehouse.entity.User;
 import com.example.warehouse.page.Page;
@@ -50,7 +51,7 @@ public class UserController {
     }
 
     /**
-     * 启用或禁用用户的url
+     * 启用或禁用用户
      */
     @RequestMapping("/updateState")
     public Result updateUserState(@RequestBody User user) {
@@ -68,5 +69,13 @@ public class UserController {
         return Result.ok(roleList);
     }
 
+    /**
+     * 给用户分配角色
+     */
+    @RequestMapping("/assignRole")
+    public Result assignRole(@RequestBody AssignRoleDto assignRoleDto) {
+        userService.assignRole(assignRoleDto);
+        return Result.ok("分配角色成功");
+    }
 
 }

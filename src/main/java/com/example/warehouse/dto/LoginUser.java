@@ -1,4 +1,4 @@
-package com.example.warehouse.entity;
+package com.example.warehouse.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
