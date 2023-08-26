@@ -119,8 +119,21 @@ public class UserServiceImpl implements UserService {
     public Result updateUserName(User user) {
         int i = userMapper.updateUserName(user);
         if (i > 0) {
-            return Result.ok("修改用户成功！");
+            return Result.ok("修改用户姓名成功！");
         }
-        return Result.err(Result.CODE_ERR_BUSINESS, "修改用户失败！");
+        return Result.err(Result.CODE_ERR_BUSINESS, "修改用户姓名失败！");
+    }
+
+    /**
+     * 初始化userPwd
+     */
+    @Override
+    public Result resetUserPassword(User user) {
+        user.setUserPwd(DigestUtil.hmacSign("123456"));
+        int i = userMapper.updateUserPassword(user);
+        if (i > 0) {
+            return Result.ok("重置用户密码成功！");
+        }
+        return Result.err(Result.CODE_ERR_BUSINESS, "重置用户密码失败");
     }
 }

@@ -47,4 +47,9 @@ public interface UserService {
      * 修改userName
      */
     Result updateUserName(User user);
+
+    /**
+     * 初始化userPwd
+     */
+    Result resetUserPassword(User user);
 }

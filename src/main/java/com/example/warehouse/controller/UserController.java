@@ -105,4 +105,14 @@ public class UserController {
         user.setUpdateBy(tokenUtils.getCurrentUser(token).getUserId());
         return userService.updateUserName(user);
     }
+
+    /**
+     * 重置密码
+     */
+    @RequestMapping("/updatePwd/{userId}")
+    public Result resetPassword(@PathVariable Integer userId) {
+        User user = new User();
+        user.setUserId(userId);
+        return userService.resetUserPassword(user);
+    }
 }

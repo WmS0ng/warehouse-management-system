@@ -31,6 +31,12 @@
             update_time = now()
         where user_id = #{userId}
     </update>
+    <!-- 修改用户密码 -->
+    <update id="updateUserPassword">
+        update user_info
+        set user_pwd = #{userPwd}
+        where user_id = #{userId}
+    </update>
     <!-- 根据账号查询用户信息的方法 -->
     <select id="selectUserByCode" resultType="user">
         select *

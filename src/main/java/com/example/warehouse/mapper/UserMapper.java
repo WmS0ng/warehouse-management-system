@@ -44,4 +44,9 @@ public interface UserMapper {
      * 根据用户id修改用户昵称
      */
     int updateUserName(User user);
+
+    /**
+     * 修改用户密码
+     */
+    int updateUserPassword(User user);
 }
