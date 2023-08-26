@@ -34,4 +34,9 @@ public interface UserMapper {
      * 根据用户id修改用户状态
      */
     int updateStateByUid(@Param("userId") Integer userId, @Param("userState") String userState);
+
+    /**
+     * 根据ids修改用户的删除状态
+     */
+    int updateIsDeleteByUidList(List<Integer> userIdList);
 }

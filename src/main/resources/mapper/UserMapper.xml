@@ -14,6 +14,15 @@
         set user_state = #{userState}
         where user_id = #{userId}
     </update>
+    <!-- 根据ids修改用户的删除状态 -->
+    <update id="updateIsDeleteByUidList">
+        update user_info
+        set is_delete = 1
+        where user_id in
+        <foreach collection="list" open="(" close=")" separator="," item="userId">
+            #{userId}
+        </foreach>
+    </update>
     <!-- 根据账号查询用户信息的方法 -->
     <select id="selectUserByCode" resultType="user">
         select *

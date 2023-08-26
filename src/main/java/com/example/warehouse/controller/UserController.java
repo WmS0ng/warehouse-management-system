@@ -14,6 +14,7 @@ import com.example.warehouse.utils.WarehouseConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -78,4 +79,21 @@ public class UserController {
         return Result.ok("分配角色成功");
     }
 
+    /**
+     * 根据用户id删除用户
+     */
+    @RequestMapping("/deleteUser/{userId}")
+    public Result deleteUserByUid(@PathVariable Integer userId) {
+        ArrayList<Integer> userIdList = new ArrayList<>();
+        userIdList.add(userId);
+        return userService.deleteUserByIds(userIdList);
+    }
+
+    /**
+     * 根据用户ids批量删除用户
+     */
+    @RequestMapping("/deleteUserList")
+    public Result deleteUsersByUids(@RequestBody List<Integer> userIdList) {
+        return userService.deleteUserByIds(userIdList);
+    }
 }

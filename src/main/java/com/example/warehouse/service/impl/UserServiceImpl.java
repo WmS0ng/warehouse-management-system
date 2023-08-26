@@ -98,4 +98,17 @@ public class UserServiceImpl implements UserService {
             userRoleMapper.insertUserRole(userRole);
         }
     }
+
+    /**
+     * 批量删除用户
+     */
+    @Override
+    public Result deleteUserByIds(List<Integer> userIdList) {
+        int i = userMapper.updateIsDeleteByUidList(userIdList);
+        if (i > 0) {
+            return Result.ok("用户删除成功");
+        }
+
+        return Result.err(Result.CODE_ERR_BUSINESS, "用户删除失败");
+    }
 }

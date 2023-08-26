@@ -6,6 +6,8 @@ import com.example.warehouse.entity.User;
 import com.example.warehouse.page.Page;
 import com.example.warehouse.result.Result;
 
+import java.util.List;
+
 /**
  * user_info标的service接口
  */
@@ -34,4 +36,10 @@ public interface UserService {
      * 给用户分配角色的业务方法
      */
     void assignRole(AssignRoleDto assignRoleDto);
+
+    /**
+     * 批量删除用户
+     */
+    Result deleteUserByIds(List<Integer> userIdList);
+
 }
