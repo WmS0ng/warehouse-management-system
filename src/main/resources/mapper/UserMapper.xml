@@ -23,6 +23,14 @@
             #{userId}
         </foreach>
     </update>
+    <!-- 根据用户id修改用户昵称 -->
+    <update id="updateUserName">
+        update user_info
+        set user_name   = #{userName},
+            update_by   = #{updateBy},
+            update_time = now()
+        where user_id = #{userId}
+    </update>
     <!-- 根据账号查询用户信息的方法 -->
     <select id="selectUserByCode" resultType="user">
         select *

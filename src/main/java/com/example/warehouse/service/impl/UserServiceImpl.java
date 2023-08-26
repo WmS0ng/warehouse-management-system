@@ -111,4 +111,16 @@ public class UserServiceImpl implements UserService {
 
         return Result.err(Result.CODE_ERR_BUSINESS, "用户删除失败");
     }
+
+    /**
+     * 修改userName
+     */
+    @Override
+    public Result updateUserName(User user) {
+        int i = userMapper.updateUserName(user);
+        if (i > 0) {
+            return Result.ok("修改用户成功！");
+        }
+        return Result.err(Result.CODE_ERR_BUSINESS, "修改用户失败！");
+    }
 }

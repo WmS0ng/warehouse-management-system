@@ -42,4 +42,9 @@ public interface UserService {
      */
     Result deleteUserByIds(List<Integer> userIdList);
 
+
+    /**
+     * 修改userName
+     */
+    Result updateUserName(User user);
 }

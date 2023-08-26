@@ -96,4 +96,13 @@ public class UserController {
     public Result deleteUsersByUids(@RequestBody List<Integer> userIdList) {
         return userService.deleteUserByIds(userIdList);
     }
+
+    /**
+     * 修改userName
+     */
+    @RequestMapping("/updateUser")
+    public Result updateUserName(@RequestBody User user, @RequestHeader(WarehouseConstants.HEADER_TOKEN_NAME) String token) {
+        user.setUpdateBy(tokenUtils.getCurrentUser(token).getUserId());
+        return userService.updateUserName(user);
+    }
 }

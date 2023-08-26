@@ -39,4 +39,9 @@ public interface UserMapper {
      * 根据ids修改用户的删除状态
      */
     int updateIsDeleteByUidList(List<Integer> userIdList);
+
+    /**
+     * 根据用户id修改用户昵称
+     */
+    int updateUserName(User user);
 }
