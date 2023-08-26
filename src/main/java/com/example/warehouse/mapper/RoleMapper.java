@@ -1,6 +1,7 @@
 package com.example.warehouse.mapper;
 
 import com.example.warehouse.entity.Role;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -16,6 +17,11 @@ public interface RoleMapper {
      * 查询所有角色的方法
      */
     List<Role> selectAllRole();
+
+    /**
+     * 根据userId查询所有角色
+     */
+    List<Role> selectRoleListByUid(@Param("userId") Integer userId);
 }
 
 

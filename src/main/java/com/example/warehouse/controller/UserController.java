@@ -1,26 +1,29 @@
 package com.example.warehouse.controller;
 
 
+import com.example.warehouse.entity.CurrentUser;
+import com.example.warehouse.entity.Role;
 import com.example.warehouse.entity.User;
-import com.example.warehouse.entity.dto.CurrentUser;
 import com.example.warehouse.page.Page;
 import com.example.warehouse.result.Result;
+import com.example.warehouse.service.RoleService;
 import com.example.warehouse.service.UserService;
 import com.example.warehouse.utils.TokenUtils;
 import com.example.warehouse.utils.WarehouseConstants;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
     @Autowired
-    UserService userService;
+    private UserService userService;
     @Autowired
-    TokenUtils tokenUtils;
+    private TokenUtils tokenUtils;
+    @Autowired
+    private RoleService roleService;
 
     /**
      * 用户的分页查询
@@ -54,4 +57,16 @@ public class UserController {
         // 执行任务
         return userService.updateState(user);
     }
+
+    /**
+     * 根据userId查询对应角色
+     */
+    @RequestMapping("/user-role-list/{userId}")
+    public Result userRoleList(@PathVariable Integer userId) {
+        List<Role> roleList = roleService.selectRoleListByUid(userId);
+
+        return Result.ok(roleList);
+    }
+
+
 }

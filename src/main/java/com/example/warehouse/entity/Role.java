@@ -11,24 +11,17 @@ import java.util.Date;
  */
 @Data
 public class Role implements Serializable {
+
     @Serial
     private static final long serialVersionUID = 1L;
-
     private Integer roleId;
-
     private String roleName;
-
     private String roleDesc;
-
     private String roleCode;
-
     private String roleState;
-
     private Integer createBy;
-
     private Date createTime;
-
     private Integer updateBy;
-
     private Date updateTime;
+
 }

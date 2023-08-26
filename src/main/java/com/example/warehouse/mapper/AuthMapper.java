@@ -1,6 +1,6 @@
 package com.example.warehouse.mapper;
 
-import com.example.warehouse.entity.dto.AuthTree;
+import com.example.warehouse.entity.AuthTree;
 
 import java.util.List;
 

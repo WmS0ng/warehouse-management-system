@@ -26,4 +26,13 @@ public class RoleServiceImpl implements RoleService {
     public List<Role> selectAllRole() {
         return roleMapper.selectAllRole();
     }
+
+
+    /**
+     * 根据userId查询所有角色
+     */
+    @Override
+    public List<Role> selectRoleListByUid(Integer userId) {
+        return roleMapper.selectRoleListByUid(userId);
+    }
 }
