@@ -4,6 +4,7 @@ import com.example.warehouse.dto.CurrentUser;
 import com.example.warehouse.entity.Role;
 import com.example.warehouse.page.Page;
 import com.example.warehouse.result.Result;
+import com.example.warehouse.service.AuthService;
 import com.example.warehouse.service.RoleService;
 import com.example.warehouse.utils.TokenUtils;
 import com.example.warehouse.utils.WarehouseConstants;
@@ -19,6 +20,8 @@ public class RoleController {
     private RoleService roleService;
     @Autowired
     private TokenUtils tokenUtils;
+    @Autowired
+    private AuthService authService;
 
     /**
      * 查询所有角色
@@ -62,5 +65,15 @@ public class RoleController {
     @RequestMapping("/role-delete/{roleId}")
     public Result deleteRoleByRid(@PathVariable Integer roleId) {
         return roleService.deleteRoleByRid(roleId);
+    }
+
+    /**
+     * 根据角色id查询权限
+     */
+    @RequestMapping("/role-auth")
+    public Result selectAuthByRid(Integer roleId) {
+        List<Integer> authIdList = authService.selectAuthIdListByRid(roleId);
+
+        return Result.ok(authIdList);
     }
 }

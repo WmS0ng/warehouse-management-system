@@ -11,7 +11,17 @@ import java.util.List;
  * @Entity com.example.warehouse.entity.Auth
  */
 public interface AuthMapper {
-    List<AuthTree> findAuthListByUid(Integer userId);
+    /**
+     * 根据userId查询权限
+     */
+    List<AuthTree> selectAuthListByUid(Integer userId);
+
+    /**
+     * 查询所有权限
+     */
+    List<AuthTree> selectAuth();
+
+
 }
 
 

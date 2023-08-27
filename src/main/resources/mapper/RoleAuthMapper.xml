@@ -9,4 +9,11 @@
         from role_auth
         where role_id = #{roleId}
     </delete>
+
+    <!-- 根据roleId查询权限id -->
+    <select id="selectAuthIdListByRid" resultType="java.lang.Integer">
+        select auth_id
+        from role_auth
+        where role_id = #{roleId}
+    </select>
 </mapper>
