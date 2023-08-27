@@ -27,4 +27,9 @@ public interface RoleService {
      * 添加角色
      */
     Result insertRole(Role role);
+
+    /**
+     * 启用或禁用角色
+     */
+    Result updateRoleStateByRid(Role role);
 }

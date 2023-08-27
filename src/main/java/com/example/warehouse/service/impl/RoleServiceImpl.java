@@ -72,4 +72,17 @@ public class RoleServiceImpl implements RoleService {
         }
         return Result.err(Result.CODE_ERR_BUSINESS, "角色添加失败！");
     }
+
+    /**
+     * 启动或禁用角色
+     */
+    @Override
+    @CacheEvict(key = "'all:role'")
+    public Result updateRoleStateByRid(Role role) {
+        int i = roleMapper.updateRoleStateByRid(role.getRoleId(), role.getRoleState());
+        if (i > 0) {
+            return Result.ok("启用或禁用角色成功！");
+        }
+        return Result.err(Result.CODE_ERR_BUSINESS, "启用或禁用角色失败！");
+    }
 }

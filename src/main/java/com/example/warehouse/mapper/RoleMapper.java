@@ -48,8 +48,9 @@ public interface RoleMapper {
      * 添加角色
      */
     int insertRole(Role role);
+
+    /**
+     * 根据角色id修改角色状态
+     */
+    int updateRoleStateByRid(@Param("roleId") Integer roleId, @Param("roleState") String roleState);
 }
-
-
-
-

@@ -50,4 +50,12 @@ public class RoleController {
         role.setCreateBy(currentUser.getUserId());
         return roleService.insertRole(role);
     }
+
+    /**
+     * 启用或禁用角色
+     */
+    @RequestMapping("/role-state-update")
+    public Result updateRoleStateByRid(@RequestBody Role role) {
+        return roleService.updateRoleStateByRid(role);
+    }
 }
