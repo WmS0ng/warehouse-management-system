@@ -8,10 +8,7 @@ import com.example.warehouse.service.RoleService;
 import com.example.warehouse.utils.TokenUtils;
 import com.example.warehouse.utils.WarehouseConstants;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -57,5 +54,13 @@ public class RoleController {
     @RequestMapping("/role-state-update")
     public Result updateRoleStateByRid(@RequestBody Role role) {
         return roleService.updateRoleStateByRid(role);
+    }
+
+    /**
+     * 根据角色id删除角色
+     */
+    @RequestMapping("/role-delete/{roleId}")
+    public Result deleteRoleByRid(@PathVariable Integer roleId) {
+        return roleService.deleteRoleByRid(roleId);
     }
 }

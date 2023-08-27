@@ -32,4 +32,9 @@ public interface RoleService {
      * 启用或禁用角色
      */
     Result updateRoleStateByRid(Role role);
+
+    /**
+     * 根据角色id删除角色
+     */
+    Result deleteRoleByRid(Integer roleId);
 }

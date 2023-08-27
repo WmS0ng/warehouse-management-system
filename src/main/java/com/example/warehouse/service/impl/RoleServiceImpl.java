@@ -85,4 +85,17 @@ public class RoleServiceImpl implements RoleService {
         }
         return Result.err(Result.CODE_ERR_BUSINESS, "启用或禁用角色失败！");
     }
+
+    /**
+     * 根据角色id删除角色
+     */
+    @CacheEvict(key = "'all:role'")
+    @Override
+    public Result deleteRoleByRid(Integer roleId) {
+        int i = roleMapper.deleteRoleByRid(roleId);
+        if (i > 0) {
+            return Result.ok("角色删除成功！");
+        }
+        return Result.err(Result.CODE_ERR_BUSINESS, "角色删除失败！");
+    }
 }

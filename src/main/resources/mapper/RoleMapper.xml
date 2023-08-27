@@ -14,6 +14,12 @@
         set role_state = #{roleState}
         where role_id = #{roleId}
     </update>
+    <!-- 根据角色id删除角色 -->
+    <delete id="deleteRoleByRid">
+        delete
+        from role
+        where role_id = #{roleId}
+    </delete>
     <!-- 查询所有角色的方法 -->
     <select id="selectAllRole" resultType="com.example.warehouse.entity.Role">
         select *

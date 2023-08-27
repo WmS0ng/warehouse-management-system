@@ -53,4 +53,9 @@ public interface RoleMapper {
      * 根据角色id修改角色状态
      */
     int updateRoleStateByRid(@Param("roleId") Integer roleId, @Param("roleState") String roleState);
+
+    /**
+     * 根据角色id删除角色
+     */
+    int deleteRoleByRid(Integer roleId);
 }
