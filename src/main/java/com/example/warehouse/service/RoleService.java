@@ -1,5 +1,6 @@
 package com.example.warehouse.service;
 
+import com.example.warehouse.dto.AssignAuthDto;
 import com.example.warehouse.entity.Role;
 import com.example.warehouse.page.Page;
 import com.example.warehouse.result.Result;
@@ -37,4 +38,9 @@ public interface RoleService {
      * 根据角色id删除角色
      */
     Result deleteRoleByRid(Integer roleId);
+
+    /**
+     * 给角色分配权限
+     */
+    void insertRoleAuth(AssignAuthDto assignAuthDto);
 }

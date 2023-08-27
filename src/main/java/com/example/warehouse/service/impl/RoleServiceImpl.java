@@ -1,6 +1,8 @@
 package com.example.warehouse.service.impl;
 
+import com.example.warehouse.dto.AssignAuthDto;
 import com.example.warehouse.entity.Role;
+import com.example.warehouse.entity.RoleAuth;
 import com.example.warehouse.mapper.RoleAuthMapper;
 import com.example.warehouse.mapper.RoleMapper;
 import com.example.warehouse.page.Page;
@@ -103,5 +105,23 @@ public class RoleServiceImpl implements RoleService {
             return Result.ok("角色删除成功！");
         }
         return Result.err(Result.CODE_ERR_BUSINESS, "角色删除失败！");
+    }
+
+    /**
+     * 给角色分配权限
+     */
+    @Override
+    @Transactional
+    public void insertRoleAuth(AssignAuthDto assignAuthDto) {
+        // 删除角色之前的所有权限
+        roleAuthMapper.deleteRoleAuthByRid(assignAuthDto.getRoleId());
+        // 添加角色权限关系
+        List<Integer> authIdList = assignAuthDto.getAuthIds();
+        for (Integer authId : authIdList) {
+            RoleAuth roleAuth = new RoleAuth();
+            roleAuth.setRoleId(assignAuthDto.getRoleId());
+            roleAuth.setAuthId(authId);
+            roleAuthMapper.insertRoleAuth(roleAuth);
+        }
     }
 }

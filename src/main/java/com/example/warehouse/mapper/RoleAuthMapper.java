@@ -1,5 +1,7 @@
 package com.example.warehouse.mapper;
 
+import com.example.warehouse.entity.RoleAuth;
+
 import java.util.List;
 
 /**
@@ -14,11 +16,15 @@ public interface RoleAuthMapper {
      */
     int deleteRoleAuthByRid(Integer roleId);
 
-
     /**
      * 根据roleId查询权限id
      */
     List<Integer> selectAuthIdListByRid(Integer roleId);
+
+    /**
+     * 添加角色权限的方法
+     */
+    int insertRoleAuth(RoleAuth roleAuth);
 }
 
 

@@ -1,5 +1,6 @@
 package com.example.warehouse.controller;
 
+import com.example.warehouse.dto.AssignAuthDto;
 import com.example.warehouse.dto.CurrentUser;
 import com.example.warehouse.entity.Role;
 import com.example.warehouse.page.Page;
@@ -75,5 +76,15 @@ public class RoleController {
         List<Integer> authIdList = authService.selectAuthIdListByRid(roleId);
 
         return Result.ok(authIdList);
+    }
+
+    /**
+     * 给角色分配权限
+     */
+    @RequestMapping("/auth-grant")
+    public Result grantAuth(@RequestBody AssignAuthDto assignAuthDto) {
+        roleService.insertRoleAuth(assignAuthDto);
+
+        return Result.ok("权限分配成功！");
     }
 }

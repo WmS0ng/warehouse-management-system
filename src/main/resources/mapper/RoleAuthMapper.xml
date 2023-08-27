@@ -3,6 +3,11 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.warehouse.mapper.RoleAuthMapper">
+    <!-- 添加角色权限的方法 -->
+    <insert id="insertRoleAuth">
+        insert into role_auth
+        values (null, #{roleId}, #{authId})
+    </insert>
     <!-- 根据角色id删除角色关系 -->
     <delete id="deleteRoleAuthByRid">
         delete
