@@ -7,6 +7,7 @@ import com.example.warehouse.result.Result;
 import com.example.warehouse.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -56,6 +57,7 @@ public class RoleServiceImpl implements RoleService {
      * 插入角色
      */
     @Override
+    @CacheEvict(key = "'all:role'")
     public Result insertRole(Role role) {
         // 判断角色是否存在
         Role selectRole = roleMapper.selectRoleByNameOrCode(role.getRoleName(), role.getRoleCode());
