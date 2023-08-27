@@ -3,6 +3,7 @@ package com.example.warehouse.service.impl;
 import com.example.warehouse.entity.Role;
 import com.example.warehouse.mapper.RoleMapper;
 import com.example.warehouse.page.Page;
+import com.example.warehouse.result.Result;
 import com.example.warehouse.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
@@ -49,5 +50,24 @@ public class RoleServiceImpl implements RoleService {
         page.setTotalNum(count);
         page.setResultList(roleList);
         return page;
+    }
+
+    /**
+     * 插入角色
+     */
+    @Override
+    public Result insertRole(Role role) {
+        // 判断角色是否存在
+        Role selectRole = roleMapper.selectRoleByNameOrCode(role.getRoleName(), role.getRoleCode());
+        // 角色已存在
+        if (selectRole != null) {
+            return Result.err(Result.CODE_ERR_BUSINESS, "角色已存在！");
+        }
+        // 角色不存在
+        int i = roleMapper.insertRole(role);
+        if (i > 0) {
+            return Result.ok("角色添加成功！");
+        }
+        return Result.err(Result.CODE_ERR_BUSINESS, "角色添加失败！");
     }
 }

@@ -2,6 +2,7 @@ package com.example.warehouse.service;
 
 import com.example.warehouse.entity.Role;
 import com.example.warehouse.page.Page;
+import com.example.warehouse.result.Result;
 
 import java.util.List;
 
@@ -21,4 +22,9 @@ public interface RoleService {
      * 角色分页查询
      */
     Page selectRolePage(Page page, Role role);
+
+    /**
+     * 添加角色
+     */
+    Result insertRole(Role role);
 }

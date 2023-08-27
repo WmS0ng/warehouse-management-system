@@ -3,6 +3,11 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.warehouse.mapper.RoleMapper">
+    <!-- 添加角色 -->
+    <insert id="insertRole">
+        insert into role
+        values (null, #{roleName}, #{roleDesc}, #{roleCode}, 0, #{createBy}, now(), null, null)
+    </insert>
     <!-- 查询所有角色的方法 -->
     <select id="selectAllRole" resultType="com.example.warehouse.entity.Role">
         select *
@@ -54,5 +59,12 @@
         </if>
         order by t1.create_time desc
         limit #{page.limitIndex}, #{page.pageSize}
+    </select>
+    <!-- 根据角色名称或角色代码查询角色 -->
+    <select id="selectRoleByNameOrCode" resultType="com.example.warehouse.entity.Role">
+        select *
+        from role
+        where role_name = #{roleName}
+           or role_code = #{roleCode}
     </select>
 </mapper>

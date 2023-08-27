@@ -38,6 +38,16 @@ public interface RoleMapper {
      * 分页查询角色
      */
     List<Role> selectRolePage(@Param("page") Page page, @Param("role") Role role);
+
+    /**
+     * 根据角色名称或角色代码查询角色
+     */
+    Role selectRoleByNameOrCode(@Param("roleName") String roleName, @Param("roleCode") String roleCode);
+
+    /**
+     * 添加角色
+     */
+    int insertRole(Role role);
 }
 
 
