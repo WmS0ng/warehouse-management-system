@@ -1,6 +1,7 @@
 package com.example.warehouse.service.impl;
 
 import com.example.warehouse.entity.Role;
+import com.example.warehouse.mapper.RoleAuthMapper;
 import com.example.warehouse.mapper.RoleMapper;
 import com.example.warehouse.page.Page;
 import com.example.warehouse.result.Result;
@@ -21,6 +22,8 @@ public class RoleServiceImpl implements RoleService {
 
     @Autowired
     private RoleMapper roleMapper;
+    @Autowired
+    private RoleAuthMapper roleAuthMapper;
 
     /**
      * 查询所有角色的业务方法
@@ -90,10 +93,13 @@ public class RoleServiceImpl implements RoleService {
      * 根据角色id删除角色
      */
     @CacheEvict(key = "'all:role'")
+    @Transactional
     @Override
     public Result deleteRoleByRid(Integer roleId) {
         int i = roleMapper.deleteRoleByRid(roleId);
         if (i > 0) {
+            // 删除角色权限关系
+            roleAuthMapper.deleteRoleAuthByRid(roleId);
             return Result.ok("角色删除成功！");
         }
         return Result.err(Result.CODE_ERR_BUSINESS, "角色删除失败！");
