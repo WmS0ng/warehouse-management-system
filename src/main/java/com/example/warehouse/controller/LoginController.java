@@ -53,7 +53,6 @@ public class LoginController {
             BufferedImage image = producer.createImage(text);
             // 将验证码文本作为键保存到Redis -- 设置键的过期时间为1分钟
             stringRedisTemplate.opsForValue().set(text, "", 60, TimeUnit.SECONDS);
-
             // 将验证码图片响应该前端
             // 设置响应正文image/jpeg
             response.setContentType("image/jpeg");
