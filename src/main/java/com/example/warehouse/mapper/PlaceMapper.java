@@ -1,5 +1,9 @@
 package com.example.warehouse.mapper;
 
+import com.example.warehouse.entity.Place;
+
+import java.util.List;
+
 /**
  * @author swm
  * @description 针对表【place(产地)】的数据库操作Mapper
@@ -8,6 +12,10 @@ package com.example.warehouse.mapper;
  */
 public interface PlaceMapper {
 
+    /**
+     * 查询所有产地
+     */
+    List<Place> selectAllPlace();
 }
 
 

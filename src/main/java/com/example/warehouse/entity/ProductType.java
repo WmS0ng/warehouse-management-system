@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @TableName product_type
@@ -17,4 +18,6 @@ public class ProductType implements Serializable {
     private String typeCode;
     private String typeName;
     private String typeDesc;
+    // 追加属性
+    private List<ProductType> childProductCategory;
 }
