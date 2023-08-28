@@ -33,7 +33,8 @@ public class LoginCheckFilter implements Filter {
         urls.add("/login");
         // 过滤器拦截到的当前请求的url接口
         String url = request.getServletPath();
-        if (urls.contains(url)) {
+        // 白名单请求或访问/img/upload图片的静态资源
+        if (urls.contains(url) || urls.contains("/img/upload")) {
             chain.doFilter(request, response);
             return;
         }
