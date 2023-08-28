@@ -35,9 +35,9 @@ public class Product implements Serializable {
     private Integer createBy;
     private Integer updateBy;
     private String imgs;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date productDate;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date suppDate;
     // 追加属性
     private String brandName;

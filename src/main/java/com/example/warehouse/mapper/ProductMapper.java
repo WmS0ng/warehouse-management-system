@@ -22,6 +22,16 @@ public interface ProductMapper {
      * 分页查询商品
      */
     List<Product> selectProductList(@Param("page") Page page, @Param("product") Product product);
+
+    /**
+     * 添加商品
+     */
+    int insertProduct(Product product);
+
+    /**
+     * 根据型号查询商品方法
+     */
+    Product selectProductByNum(String productNum);
 }
 
 

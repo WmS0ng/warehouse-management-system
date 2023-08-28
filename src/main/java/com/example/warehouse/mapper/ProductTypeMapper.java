@@ -15,6 +15,8 @@ public interface ProductTypeMapper {
      * 查询所有商品分类的方法
      */
     List<ProductType> selectAllProductType();
+
+
 }
 
 

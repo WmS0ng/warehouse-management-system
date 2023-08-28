@@ -1,15 +1,16 @@
 package com.example.warehouse.controller;
 
+import com.example.warehouse.dto.CurrentUser;
 import com.example.warehouse.entity.*;
 import com.example.warehouse.page.Page;
 import com.example.warehouse.result.Result;
 import com.example.warehouse.service.*;
+import com.example.warehouse.utils.TokenUtils;
+import com.example.warehouse.utils.WarehouseConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.util.ResourceUtils;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -34,6 +35,8 @@ public class ProductController {
     private UnitService unitService;
     @Value("${file.upload-path}")
     private String uploadPath;
+    @Autowired
+    private TokenUtils tokenUtils;
 
 
     /**
@@ -125,5 +128,15 @@ public class ProductController {
         } catch (Exception e) {
             return Result.err(Result.CODE_ERR_BUSINESS, "图片上传失败！");
         }
+    }
+
+    /**
+     * 添加商品
+     */
+    @RequestMapping("/product-add")
+    public Result addProduct(@RequestBody Product product, @RequestHeader(WarehouseConstants.HEADER_TOKEN_NAME) String token) {
+        CurrentUser currentUser = tokenUtils.getCurrentUser(token);
+        product.setCreateBy(currentUser.getUserId());
+        return productService.saveProduct(product);
     }
 }
