@@ -14,6 +14,14 @@
         set role_state = #{roleState}
         where role_id = #{roleId}
     </update>
+    <!-- 根据角色id修改角色描述 -->
+    <update id="updateDescByRid">
+        update role
+        set role_desc   = #{roleDesc},
+            update_by   = #{updateBy},
+            update_time = now()
+        where role_id = #{roleId}
+    </update>
     <!-- 根据角色id删除角色 -->
     <delete id="deleteRoleByRid">
         delete

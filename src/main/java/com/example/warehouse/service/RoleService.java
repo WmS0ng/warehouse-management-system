@@ -43,4 +43,9 @@ public interface RoleService {
      * 给角色分配权限
      */
     void insertRoleAuth(AssignAuthDto assignAuthDto);
+
+    /**
+     * 修改角色
+     */
+    Result updateRoleByRid(Role role);
 }

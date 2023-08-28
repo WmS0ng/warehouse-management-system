@@ -124,4 +124,18 @@ public class RoleServiceImpl implements RoleService {
             roleAuthMapper.insertRoleAuth(roleAuth);
         }
     }
+
+    /**
+     * 修改角色
+     */
+    @Override
+    @CacheEvict(key = "'all:role'")
+    public Result updateRoleByRid(Role role) {
+        int i = roleMapper.updateDescByRid(role);
+        if (i > 0) {
+            return Result.ok("角色修改成功！");
+        }
+
+        return Result.err(Result.CODE_ERR_BUSINESS, "角色修改失败！");
+    }
 }

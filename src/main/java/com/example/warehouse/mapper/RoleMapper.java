@@ -58,4 +58,9 @@ public interface RoleMapper {
      * 根据角色id删除角色
      */
     int deleteRoleByRid(Integer roleId);
+
+    /**
+     * 根据角色id修改角色描述
+     */
+    int updateDescByRid(Role role);
 }

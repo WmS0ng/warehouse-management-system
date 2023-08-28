@@ -84,7 +84,16 @@ public class RoleController {
     @RequestMapping("/auth-grant")
     public Result grantAuth(@RequestBody AssignAuthDto assignAuthDto) {
         roleService.insertRoleAuth(assignAuthDto);
-
         return Result.ok("权限分配成功！");
+    }
+
+    /**
+     * 修改角色
+     */
+    @RequestMapping("/role-update")
+    public Result updateRole(@RequestBody Role role, @RequestHeader(WarehouseConstants.HEADER_TOKEN_NAME) String token) {
+        CurrentUser currentUser = tokenUtils.getCurrentUser(token);
+        role.setUpdateBy(currentUser.getUserId());
+        return roleService.updateRoleByRid(role);
     }
 }
