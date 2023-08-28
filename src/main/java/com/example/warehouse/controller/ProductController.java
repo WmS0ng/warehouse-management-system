@@ -139,4 +139,12 @@ public class ProductController {
         product.setCreateBy(currentUser.getUserId());
         return productService.saveProduct(product);
     }
+
+    /**
+     * 修改商品上架状态
+     */
+    @RequestMapping("/state-change")
+    public Result changeProductState(@RequestBody Product product) {
+        return productService.updateProductStateByPid(product);
+    }
 }

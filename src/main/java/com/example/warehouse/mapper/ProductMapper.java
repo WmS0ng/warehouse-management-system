@@ -32,6 +32,11 @@ public interface ProductMapper {
      * 根据型号查询商品方法
      */
     Product selectProductByNum(String productNum);
+
+    /**
+     * 根据商品id修改商品上下架状态
+     */
+    int updateProductStateByPid(@Param("productId") Integer productId, @Param("upDownState") String upDownState);
 }
 
 

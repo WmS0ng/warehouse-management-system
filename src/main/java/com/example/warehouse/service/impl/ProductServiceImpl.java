@@ -50,4 +50,16 @@ public class ProductServiceImpl implements ProductService {
         }
         return Result.err(Result.CODE_ERR_BUSINESS, "商品添加失败！");
     }
+
+    /**
+     * 根据商品id修改商品状态
+     */
+    @Override
+    public Result updateProductStateByPid(Product product) {
+        int i = productMapper.updateProductStateByPid(product.getProductId(), product.getUpDownState());
+        if (i > 0) {
+            return Result.ok("商品状态修改成功！");
+        }
+        return Result.err(Result.CODE_ERR_BUSINESS, "商品状态修改失败！");
+    }
 }

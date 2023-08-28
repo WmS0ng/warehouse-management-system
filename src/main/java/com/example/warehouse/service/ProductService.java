@@ -14,4 +14,9 @@ public interface ProductService {
      * 添加商品
      */
     Result saveProduct(Product product);
+
+    /**
+     * 根据商品id修改商品状态
+     */
+    Result updateProductStateByPid(Product product);
 }
