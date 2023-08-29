@@ -8,6 +8,13 @@
         insert into product_type
         values (null, #{parentId}, #{typeCode}, #{typeName}, #{typeDesc})
     </insert>
+    <!-- 根据id或父类id删除商品分类 -->
+    <delete id="deleteProductType">
+        delete
+        from product_type
+        where type_id = #{typeId}
+           or parent_id = #{typeId}
+    </delete>
 
     <!-- 查询所有商品分类 -->
     <select id="selectAllProductType" resultType="com.example.warehouse.entity.ProductType">

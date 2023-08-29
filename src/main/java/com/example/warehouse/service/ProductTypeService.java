@@ -20,4 +20,9 @@ public interface ProductTypeService {
      * 添加商品分类
      */
     Result saveProductType(ProductType productType);
+
+    /**
+     * 删除商品分类
+     */
+    Result deleteProductType(Integer typeId);
 }

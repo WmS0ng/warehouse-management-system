@@ -25,6 +25,11 @@ public interface ProductTypeMapper {
      * 添加商品分类
      */
     int insertProductType(ProductType productType);
+
+    /**
+     * 根据分类id或父级分类id删除分类
+     */
+    int deleteProductType(Integer typeId);
 }
 
 

@@ -4,6 +4,7 @@ import com.example.warehouse.entity.ProductType;
 import com.example.warehouse.result.Result;
 import com.example.warehouse.service.ProductTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,5 +42,13 @@ public class ProductTypeController {
     @RequestMapping("/type-add")
     public Result addProductType(@RequestBody ProductType productType) {
         return productTypeService.saveProductType(productType);
+    }
+
+    /**
+     * 删除商品分类
+     */
+    @RequestMapping("/type-delete/{typeId}")
+    public Result deleteProductType(@PathVariable Integer typeId) {
+        return productTypeService.deleteProductType(typeId);
     }
 }

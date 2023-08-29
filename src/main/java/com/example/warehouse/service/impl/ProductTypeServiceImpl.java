@@ -62,6 +62,19 @@ public class ProductTypeServiceImpl implements ProductTypeService {
     }
 
     /**
+     * 删除商品分类
+     */
+    @Override
+    @CacheEvict(key = "'all:typeTree'")
+    public Result deleteProductType(Integer typeId) {
+        int i = productTypeMapper.deleteProductType(typeId);
+        if (i > 0) {
+            return Result.ok("删除商品分类成功！");
+        }
+        return Result.err(Result.CODE_ERR_BUSINESS, "删除商品分类失败！");
+    }
+
+    /**
      * 将所有商品分类转换成商品分类树
      */
     private List<ProductType> allTypeToTypeTree(List<ProductType> productTypeList, Integer pid) {
