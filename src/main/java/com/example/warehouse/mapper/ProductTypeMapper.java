@@ -16,7 +16,15 @@ public interface ProductTypeMapper {
      */
     List<ProductType> selectAllProductType();
 
+    /**
+     * 根据分类编码或者分类名称查询商品分类
+     */
+    ProductType selectProductTypeByCodeOrName(ProductType productType);
 
+    /**
+     * 添加商品分类
+     */
+    int insertProductType(ProductType productType);
 }
 
 

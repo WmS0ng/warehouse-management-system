@@ -2,11 +2,14 @@ package com.example.warehouse.service.impl;
 
 import com.example.warehouse.entity.ProductType;
 import com.example.warehouse.mapper.ProductTypeMapper;
+import com.example.warehouse.result.Result;
 import com.example.warehouse.service.ProductTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +30,35 @@ public class ProductTypeServiceImpl implements ProductTypeService {
         List<ProductType> productTypeTree = allTypeToTypeTree(productTypeList, 0);
 
         return productTypeTree;
+    }
+
+    /**
+     * 检验分类编码是否存在
+     */
+    @Override
+    public Result checkTypeCode(ProductType productType) {
+        ProductType selectProductType = productTypeMapper.selectProductTypeByCodeOrName(productType);
+        return Result.ok(selectProductType == null);
+    }
+
+    /**
+     * 添加商品分类
+     */
+    @Override
+    @Transactional
+    @CacheEvict(key = "'all:typeTree'")
+    public Result saveProductType(ProductType productType) {
+        ProductType tempProductType = new ProductType();
+        tempProductType.setTypeName(productType.getTypeName());
+        ProductType tempProductType2 = productTypeMapper.selectProductTypeByCodeOrName(tempProductType);
+        if (tempProductType2 != null) {
+            return Result.err(Result.CODE_ERR_BUSINESS, "分类名称已经存在！");
+        }
+        int i = productTypeMapper.insertProductType(productType);
+        if (i > 0) {
+            return Result.ok("添加商品分类成功！");
+        }
+        return Result.err(Result.CODE_ERR_BUSINESS, "添加商品分类失败！");
     }
 
     /**
