@@ -166,4 +166,14 @@ public class ProductController {
     public Result deleteProductList(@RequestBody List<Integer> productIdList) {
         return productService.deleteProductByPidList(productIdList);
     }
+
+    /**
+     * 修改商品
+     */
+    @RequestMapping("/product-update")
+    public Result updateProduct(@RequestBody Product product, @RequestHeader(WarehouseConstants.HEADER_TOKEN_NAME) String token) {
+        CurrentUser currentUser = tokenUtils.getCurrentUser(token);
+        product.setUpdateBy(currentUser.getUserId());
+        return productService.updateProductById(product);
+    }
 }

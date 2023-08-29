@@ -26,4 +26,9 @@ public interface ProductService {
      * 删除商品
      */
     Result deleteProductByPidList(List<Integer> productIdList);
+
+    /**
+     * 修改商品
+     */
+    Result updateProductById(Product product);
 }

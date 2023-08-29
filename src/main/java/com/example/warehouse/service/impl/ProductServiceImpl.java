@@ -74,4 +74,27 @@ public class ProductServiceImpl implements ProductService {
         }
         return Result.err(Result.CODE_ERR_BUSINESS, "商品删除失败！");
     }
+
+    /**
+     * 修改商品
+     */
+    @Override
+    public Result updateProductById(Product product) {
+        // 判断修改后的型号是否存在
+        Product selectProduct = productMapper.selectProductByNum(product.getProductNum());
+        if (selectProduct != null && !selectProduct.getProductId().equals(product.getProductId())) {
+            return Result.err(Result.CODE_ERR_BUSINESS, "商品型号已经存在，修改失败！");
+        }
+        // 判断上传的图片是否被修改
+        if (!product.getImgs().contains(fileAccessPath)) {
+            product.setImgs(fileAccessPath + product.getImgs());
+        }
+        // 修改商品
+        int i = productMapper.updateProductByPid(product);
+        if (i > 0) {
+            return Result.ok("商品修改成功！");
+        }
+
+        return Result.err(Result.CODE_ERR_BUSINESS, "商品修改失败！");
+    }
 }

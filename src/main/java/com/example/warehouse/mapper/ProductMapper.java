@@ -43,6 +43,10 @@ public interface ProductMapper {
      */
     int deleteProductByPidList(List<Integer> productIdList);
 
+    /**
+     * 根据商品id修改商品方法
+     */
+    int updateProductByPid(Product product);
 }
 
 
