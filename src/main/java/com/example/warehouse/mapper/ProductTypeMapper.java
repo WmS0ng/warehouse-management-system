@@ -30,6 +30,11 @@ public interface ProductTypeMapper {
      * 根据分类id或父级分类id删除分类
      */
     int deleteProductType(Integer typeId);
+
+    /**
+     * 根据id修改商品分类
+     */
+    int updateById(ProductType productType);
 }
 
 

@@ -25,4 +25,9 @@ public interface ProductTypeService {
      * 删除商品分类
      */
     Result deleteProductType(Integer typeId);
+
+    /**
+     * 修改商品分类
+     */
+    Result updateById(ProductType productType);
 }

@@ -75,6 +75,25 @@ public class ProductTypeServiceImpl implements ProductTypeService {
     }
 
     /**
+     * 修改商品分类
+     */
+    @Override
+    @CacheEvict(key = "'all:typeTree'")
+    public Result updateById(ProductType productType) {
+        ProductType tempProductType = new ProductType();
+        tempProductType.setTypeName(productType.getTypeName());
+        ProductType selectProductType = productTypeMapper.selectProductTypeByCodeOrName(tempProductType);
+        if (selectProductType != null && !productType.getTypeId().equals(selectProductType.getTypeId())) {
+            return Result.err(Result.CODE_ERR_BUSINESS, "分类名字已经存在，无法修改！");
+        }
+        int i = productTypeMapper.updateById(productType);
+        if (i > 0) {
+            return Result.ok("商品分类修改成功！");
+        }
+        return Result.err(Result.CODE_ERR_BUSINESS, "商品分类修改失败！");
+    }
+
+    /**
      * 将所有商品分类转换成商品分类树
      */
     private List<ProductType> allTypeToTypeTree(List<ProductType> productTypeList, Integer pid) {
@@ -85,14 +104,11 @@ public class ProductTypeServiceImpl implements ProductTypeService {
                 firstLevelType.add(productType);
             }
         }
-
         // 查出每个一级分类下的所有二级分类
         for (ProductType productType : firstLevelType) {
             List<ProductType> secondLevelType = allTypeToTypeTree(productTypeList, productType.getTypeId());
             productType.setChildProductCategory(secondLevelType);
         }
-
         return firstLevelType;
     }
-
 }

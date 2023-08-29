@@ -51,4 +51,12 @@ public class ProductTypeController {
     public Result deleteProductType(@PathVariable Integer typeId) {
         return productTypeService.deleteProductType(typeId);
     }
+
+    /**
+     * 修改商品分类
+     */
+    @RequestMapping("/type-update")
+    public Result updateProductType(@RequestBody ProductType productType) {
+        return productTypeService.updateById(productType);
+    }
 }
