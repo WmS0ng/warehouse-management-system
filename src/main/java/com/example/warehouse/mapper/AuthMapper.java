@@ -1,6 +1,6 @@
 package com.example.warehouse.mapper;
 
-import com.example.warehouse.dto.AuthTree;
+import com.example.warehouse.entity.Auth;
 
 import java.util.List;
 
@@ -14,12 +14,12 @@ public interface AuthMapper {
     /**
      * 根据userId查询权限
      */
-    List<AuthTree> selectAuthListByUid(Integer userId);
+    List<Auth> selectAuthListByUid(Integer userId);
 
     /**
      * 查询所有权限
      */
-    List<AuthTree> selectAuth();
+    List<Auth> selectAuth();
 
 
 }

@@ -1,6 +1,6 @@
 package com.example.warehouse.controller;
 
-import com.example.warehouse.dto.AuthTree;
+import com.example.warehouse.entity.Auth;
 import com.example.warehouse.result.Result;
 import com.example.warehouse.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +20,7 @@ public class AuthController {
      */
     @RequestMapping("/auth-tree")
     public Result loadAllAuthTree() {
-        List<AuthTree> authTreeList = authService.selectAuthTree();
+        List<Auth> authTreeList = authService.selectAuthTree();
         return Result.ok(authTreeList);
     }
 }

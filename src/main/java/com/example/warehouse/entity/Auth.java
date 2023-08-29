@@ -5,6 +5,7 @@ import lombok.Data;
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 权限表
@@ -30,5 +31,6 @@ public class Auth implements Serializable {
     private Date createTime;
     private Integer updateBy;
     private Date updateTime;
-
+    // 追加属性
+    private List<Auth> childAuth;
 }

@@ -1,7 +1,7 @@
 package com.example.warehouse.service.impl;
 
 import com.alibaba.fastjson2.JSON;
-import com.example.warehouse.dto.AuthTree;
+import com.example.warehouse.entity.Auth;
 import com.example.warehouse.mapper.AuthMapper;
 import com.example.warehouse.mapper.RoleAuthMapper;
 import com.example.warehouse.service.AuthService;
@@ -29,16 +29,16 @@ public class AuthServiceImpl implements AuthService {
      * 查询用户菜单树
      */
     @Override
-    public List<AuthTree> selectAuthTreeByUid(Integer userId) {
+    public List<Auth> selectAuthTreeByUid(Integer userId) {
         // 先从redis中查找
         String authTreeJson = stringRedisTemplate.opsForValue().get("authTree" + userId);
         if (StringUtils.hasText(authTreeJson)) {
-            return JSON.parseArray(authTreeJson, AuthTree.class);
+            return JSON.parseArray(authTreeJson, Auth.class);
         }
         // redis中不存在在从mysql中查找
-        List<AuthTree> authList = authMapper.selectAuthListByUid(userId);
+        List<Auth> authList = authMapper.selectAuthListByUid(userId);
         // 将查找出来的authList转换成authTree
-        List<AuthTree> authTree = allAuthListToAuthTreeList(authList, 0);
+        List<Auth> authTree = allAuthListToAuthTreeList(authList, 0);
         // 存入redis中一份，方便下次查询
         stringRedisTemplate.opsForValue().set("authTree" + userId, JSON.toJSONString(authTree));
         return authTree;
@@ -49,8 +49,8 @@ public class AuthServiceImpl implements AuthService {
      */
     @Override
     @Cacheable("'all:authTreeList'")
-    public List<AuthTree> selectAuthTree() {
-        List<AuthTree> authList = authMapper.selectAuth();
+    public List<Auth> selectAuthTree() {
+        List<Auth> authList = authMapper.selectAuth();
 
         return allAuthListToAuthTreeList(authList, 0);
     }
@@ -63,18 +63,18 @@ public class AuthServiceImpl implements AuthService {
         return roleAuthMapper.selectAuthIdListByRid(roleId);
     }
 
-    private List<AuthTree> allAuthListToAuthTreeList(List<AuthTree> authList, Integer pid) {
+    private List<Auth> allAuthListToAuthTreeList(List<Auth> authList, Integer pid) {
         // 查询所有一级菜单
-        List<AuthTree> firstLevelAuthList = new ArrayList<>();
-        for (AuthTree authTree : authList) {
+        List<Auth> firstLevelAuthList = new ArrayList<>();
+        for (Auth authTree : authList) {
             if (authTree.getParentId().equals(pid)) {
                 firstLevelAuthList.add(authTree);
             }
         }
 
         // 拿到每个一级菜单的所有二级菜单
-        for (AuthTree firstAuth : firstLevelAuthList) {
-            List<AuthTree> secondLevelAuthList = allAuthListToAuthTreeList(authList, firstAuth.getAuthId());
+        for (Auth firstAuth : firstLevelAuthList) {
+            List<Auth> secondLevelAuthList = allAuthListToAuthTreeList(authList, firstAuth.getAuthId());
             firstAuth.setChildAuth(secondLevelAuthList);
         }
 
