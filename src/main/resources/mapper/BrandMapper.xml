@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.warehouse.mapper.BrandMapper">
     <!-- 查询所有品牌 -->
-    <select id="selectAllBrand" resultType="com.example.warehouse.entity.Brand">
+    <select id="selectList" resultType="com.example.warehouse.entity.Brand">
         select *
         from brand
     </select>

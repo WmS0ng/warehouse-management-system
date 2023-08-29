@@ -17,50 +17,50 @@ public interface RoleMapper {
     /**
      * 查询所有角色的方法
      */
-    List<Role> selectAllRole();
+    List<Role> selectList();
 
     /**
      * 根据userId查询所有角色
      */
-    List<Role> selectRoleListByUid(Integer userId);
+    List<Role> selectListByUserId(Integer userId);
 
     /**
      * 根据角色名查询角色id的方法
      */
-    Integer selectRoleIdByName(String roleName);
+    Integer selectIdByName(String roleName);
 
     /**
      * 查询所有角色行数
      */
-    Integer selectRoleRowCount(Role role);
+    Integer countTotal(Role role);
 
     /**
      * 分页查询角色
      */
-    List<Role> selectRolePage(@Param("page") Page page, @Param("role") Role role);
+    List<Role> selectPage(@Param("page") Page page, @Param("role") Role role);
 
     /**
      * 根据角色名称或角色代码查询角色
      */
-    Role selectRoleByNameOrCode(@Param("roleName") String roleName, @Param("roleCode") String roleCode);
+    Role selectByNameOrCode(@Param("roleName") String roleName, @Param("roleCode") String roleCode);
 
     /**
      * 添加角色
      */
-    int insertRole(Role role);
+    int insert(Role role);
 
     /**
      * 根据角色id修改角色状态
      */
-    int updateRoleStateByRid(@Param("roleId") Integer roleId, @Param("roleState") String roleState);
+    int updateStateById(@Param("roleId") Integer roleId, @Param("roleState") String roleState);
 
     /**
      * 根据角色id删除角色
      */
-    int deleteRoleByRid(Integer roleId);
+    int deleteById(Integer roleId);
 
     /**
      * 根据角色id修改角色描述
      */
-    int updateDescByRid(Role role);
+    int updateDescById(Role role);
 }

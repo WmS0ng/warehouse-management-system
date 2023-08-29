@@ -4,18 +4,18 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.warehouse.mapper.RoleMapper">
     <!-- 添加角色 -->
-    <insert id="insertRole">
+    <insert id="insert">
         insert into role
         values (null, #{roleName}, #{roleDesc}, #{roleCode}, 0, #{createBy}, now(), null, null)
     </insert>
     <!-- 根据角色id修改角色状态 -->
-    <update id="updateRoleStateByRid">
+    <update id="updateStateById">
         update role
         set role_state = #{roleState}
         where role_id = #{roleId}
     </update>
     <!-- 根据角色id修改角色描述 -->
-    <update id="updateDescByRid">
+    <update id="updateDescById">
         update role
         set role_desc   = #{roleDesc},
             update_by   = #{updateBy},
@@ -23,19 +23,19 @@
         where role_id = #{roleId}
     </update>
     <!-- 根据角色id删除角色 -->
-    <delete id="deleteRoleByRid">
+    <delete id="deleteById">
         delete
         from role
         where role_id = #{roleId}
     </delete>
     <!-- 查询所有角色的方法 -->
-    <select id="selectAllRole" resultType="com.example.warehouse.entity.Role">
+    <select id="selectList" resultType="com.example.warehouse.entity.Role">
         select *
         from role
         where role_state = 1
     </select>
     <!-- 根据userId查询所有角色 -->
-    <select id="selectRoleListByUid" resultType="com.example.warehouse.entity.Role">
+    <select id="selectListByUserId" resultType="com.example.warehouse.entity.Role">
         select t2.*
         from user_role t1,
              role t2
@@ -43,13 +43,13 @@
           and t1.role_id = t2.role_id
     </select>
     <!-- 根据角色名查询角色id的方法 -->
-    <select id="selectRoleIdByName" resultType="java.lang.Integer">
+    <select id="selectIdByName" resultType="java.lang.Integer">
         select role_id
         from role
         where role_name = #{roleName}
     </select>
     <!-- 查询所有角色行数 -->
-    <select id="selectRoleRowCount" resultType="java.lang.Integer">
+    <select id="countTotal" resultType="java.lang.Integer">
         select count(*)
         from role
         <where>
@@ -64,7 +64,7 @@
             </if>
         </where>
     </select>
-    <select id="selectRolePage" resultType="com.example.warehouse.entity.Role">
+    <select id="selectPage" resultType="com.example.warehouse.entity.Role">
         select t1.*, t2.user_code get_code
         from role t1, user_info t2
         where t1.create_by = t2.user_id
@@ -81,7 +81,7 @@
         limit #{page.limitIndex}, #{page.pageSize}
     </select>
     <!-- 根据角色名称或角色代码查询角色 -->
-    <select id="selectRoleByNameOrCode" resultType="com.example.warehouse.entity.Role">
+    <select id="selectByNameOrCode" resultType="com.example.warehouse.entity.Role">
         select *
         from role
         where role_name = #{roleName}

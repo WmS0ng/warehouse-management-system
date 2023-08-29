@@ -4,20 +4,20 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.warehouse.mapper.ProductMapper">
     <!-- 添加商品 -->
-    <insert id="insertProduct">
+    <insert id="insert">
         insert into product
         values (null, #{storeId}, #{brandId}, #{productName}, #{productNum}, #{productInvent}, #{typeId},
                 #{supplyId}, #{placeId}, #{unitId}, #{introduce}, 0, #{inPrice}, #{salePrice}, #{memPrice}, now(), null,
                 #{createBy}, null, #{imgs}, #{productDate}, #{suppDate})
     </insert>
     <!-- 根据商品id修改商品上下架状态 -->
-    <update id="updateProductStateByPid">
+    <update id="updateStateById">
         update product
         set up_down_state = #{upDownState}
         where product_id = #{productId}
     </update>
     <!-- 根据商品id修改商品 -->
-    <update id="updateProductByPid">
+    <update id="updateById">
         update product
         set store_id       = #{storeId},
             brand_id       = #{brandId},
@@ -40,7 +40,7 @@
         where product_id = #{productId}
     </update>
     <!-- 根据id删除商品 -->
-    <delete id="deleteProductByPidList">
+    <delete id="deleteByIdList">
         delete
         from product
         where product_id in
@@ -49,7 +49,7 @@
         </foreach>
     </delete>
     <!-- 查询商品行数 -->
-    <select id="selectProductRowCount" resultType="java.lang.Integer">
+    <select id="countTotal" resultType="java.lang.Integer">
         select count(*)
         from product t1,
         brand t2,
@@ -89,7 +89,7 @@
         </if>
     </select>
     <!-- 分页查询商品 -->
-    <select id="selectProductList" resultType="com.example.warehouse.entity.Product">
+    <select id="selectPage" resultType="com.example.warehouse.entity.Product">
         select t1.*,
         t2.brand_name brand_name,
         t3.type_name type_name,
@@ -141,7 +141,7 @@
         limit #{page.limitIndex}, #{page.pageSize}
     </select>
     <!-- 根据型号查询商品 -->
-    <select id="selectProductByNum" resultType="com.example.warehouse.entity.Product">
+    <select id="selectByNum" resultType="com.example.warehouse.entity.Product">
         select *
         from product
         where product_num = #{productNum}

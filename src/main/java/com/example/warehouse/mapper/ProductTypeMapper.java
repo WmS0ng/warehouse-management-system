@@ -14,22 +14,22 @@ public interface ProductTypeMapper {
     /**
      * 查询所有商品分类的方法
      */
-    List<ProductType> selectAllProductType();
+    List<ProductType> selectList();
 
     /**
      * 根据分类编码或者分类名称查询商品分类
      */
-    ProductType selectProductTypeByCodeOrName(ProductType productType);
+    ProductType selectByCodeOrName(ProductType productType);
 
     /**
      * 添加商品分类
      */
-    int insertProductType(ProductType productType);
+    int insert(ProductType productType);
 
     /**
      * 根据分类id或父级分类id删除分类
      */
-    int deleteProductType(Integer typeId);
+    int deleteById(Integer typeId);
 
     /**
      * 根据id修改商品分类

@@ -22,6 +22,6 @@ public class BrandServiceImpl implements BrandService {
     @Cacheable(key = "'all:brand'")
     @Override
     public List<Brand> selectAllBrand() {
-        return brandMapper.selectAllBrand();
+        return brandMapper.selectList();
     }
 }

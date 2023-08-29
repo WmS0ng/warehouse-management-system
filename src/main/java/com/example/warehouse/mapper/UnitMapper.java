@@ -14,7 +14,7 @@ public interface UnitMapper {
     /**
      * 查询所有单位
      */
-    List<Unit> selectAllUnit();
+    List<Unit> selectList();
 }
 
 

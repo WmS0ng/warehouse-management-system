@@ -26,7 +26,7 @@ public class ProductTypeServiceImpl implements ProductTypeService {
     @Cacheable(key = "'all:typeTree'")
     @Override
     public List<ProductType> productTypeTree() {
-        List<ProductType> productTypeList = productTypeMapper.selectAllProductType();
+        List<ProductType> productTypeList = productTypeMapper.selectList();
         List<ProductType> productTypeTree = allTypeToTypeTree(productTypeList, 0);
 
         return productTypeTree;
@@ -37,7 +37,7 @@ public class ProductTypeServiceImpl implements ProductTypeService {
      */
     @Override
     public Result checkTypeCode(ProductType productType) {
-        ProductType selectProductType = productTypeMapper.selectProductTypeByCodeOrName(productType);
+        ProductType selectProductType = productTypeMapper.selectByCodeOrName(productType);
         return Result.ok(selectProductType == null);
     }
 
@@ -50,11 +50,11 @@ public class ProductTypeServiceImpl implements ProductTypeService {
     public Result saveProductType(ProductType productType) {
         ProductType tempProductType = new ProductType();
         tempProductType.setTypeName(productType.getTypeName());
-        ProductType tempProductType2 = productTypeMapper.selectProductTypeByCodeOrName(tempProductType);
+        ProductType tempProductType2 = productTypeMapper.selectByCodeOrName(tempProductType);
         if (tempProductType2 != null) {
             return Result.err(Result.CODE_ERR_BUSINESS, "分类名称已经存在！");
         }
-        int i = productTypeMapper.insertProductType(productType);
+        int i = productTypeMapper.insert(productType);
         if (i > 0) {
             return Result.ok("添加商品分类成功！");
         }
@@ -67,7 +67,7 @@ public class ProductTypeServiceImpl implements ProductTypeService {
     @Override
     @CacheEvict(key = "'all:typeTree'")
     public Result deleteProductType(Integer typeId) {
-        int i = productTypeMapper.deleteProductType(typeId);
+        int i = productTypeMapper.deleteById(typeId);
         if (i > 0) {
             return Result.ok("删除商品分类成功！");
         }
@@ -82,7 +82,7 @@ public class ProductTypeServiceImpl implements ProductTypeService {
     public Result updateById(ProductType productType) {
         ProductType tempProductType = new ProductType();
         tempProductType.setTypeName(productType.getTypeName());
-        ProductType selectProductType = productTypeMapper.selectProductTypeByCodeOrName(tempProductType);
+        ProductType selectProductType = productTypeMapper.selectByCodeOrName(tempProductType);
         if (selectProductType != null && !productType.getTypeId().equals(selectProductType.getTypeId())) {
             return Result.err(Result.CODE_ERR_BUSINESS, "分类名字已经存在，无法修改！");
         }

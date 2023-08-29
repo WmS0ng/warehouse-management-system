@@ -14,17 +14,17 @@ public interface RoleAuthMapper {
     /**
      * 根据角色id删除角色关系
      */
-    int deleteRoleAuthByRid(Integer roleId);
+    int deleteById(Integer roleId);
 
     /**
      * 根据roleId查询权限id
      */
-    List<Integer> selectAuthIdListByRid(Integer roleId);
+    List<Integer> selectIdListByRoleId(Integer roleId);
 
     /**
      * 添加角色权限的方法
      */
-    int insertRoleAuth(RoleAuth roleAuth);
+    int insert(RoleAuth roleAuth);
 }
 
 

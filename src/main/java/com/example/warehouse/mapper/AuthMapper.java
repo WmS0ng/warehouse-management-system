@@ -14,14 +14,12 @@ public interface AuthMapper {
     /**
      * 根据userId查询权限
      */
-    List<Auth> selectAuthListByUid(Integer userId);
+    List<Auth> selectListById(Integer userId);
 
     /**
      * 查询所有权限
      */
-    List<Auth> selectAuth();
-
-
+    List<Auth> selectList();
 }
 
 

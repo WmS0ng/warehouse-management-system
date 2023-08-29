@@ -15,7 +15,7 @@ public interface PlaceMapper {
     /**
      * 查询所有产地
      */
-    List<Place> selectAllPlace();
+    List<Place> selectList();
 }
 
 

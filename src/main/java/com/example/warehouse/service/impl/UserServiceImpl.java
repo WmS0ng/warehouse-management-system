@@ -29,16 +29,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User selectUserByCode(String userCode) {
-        return userMapper.selectUserByCode(userCode);
+        return userMapper.selectByCode(userCode);
     }
 
     @Override
     @Transactional
     public Page selectUserPage(Page page, User user) {
         // 查询总用户数量
-        Integer count = userMapper.selectUserRowCount(user);
+        Integer count = userMapper.countTotal(user);
         // 分页查询
-        List<User> userList = userMapper.selectUserList(page, user);
+        List<User> userList = userMapper.selectPage(page, user);
 
         page.setTotalNum(count);
         page.setResultList(userList);
@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Result insertUser(User user) {
         // 判断账号是否已存在
-        User u = userMapper.selectUserByCode(user.getUserCode());
+        User u = userMapper.selectByCode(user.getUserCode());
         // 账号已存在
         if (u != null) {
             return Result.err(Result.CODE_ERR_BUSINESS, "账号已经存在！");
@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
         user.setUserPwd(password);
 
         // 执行添加
-        int i = userMapper.insertUser(user);
+        int i = userMapper.insert(user);
         if (i > 0) {
             return Result.ok("用户添加成功！");
         }
@@ -73,7 +73,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public Result updateState(User user) {
-        int i = userMapper.updateStateByUid(user.getUserId(), user.getUserState());
+        int i = userMapper.updateStateById(user.getUserId(), user.getUserState());
         if (i > 0) {
             return Result.ok("启用或禁用成功！");
         }
@@ -88,14 +88,14 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional // 事物处理
     public void assignRole(AssignRoleDto assignRoleDto) {
-        userRoleMapper.deleteUserRoleByUid(assignRoleDto.getUserId());
+        userRoleMapper.deleteByUserId(assignRoleDto.getUserId());
         List<String> roleNameList = assignRoleDto.getRoleCheckList();
         for (String roleName : roleNameList) {
-            Integer roleId = roleMapper.selectRoleIdByName(roleName);
+            Integer roleId = roleMapper.selectIdByName(roleName);
             UserRole userRole = new UserRole();
             userRole.setUserId(assignRoleDto.getUserId());
             userRole.setRoleId(roleId);
-            userRoleMapper.insertUserRole(userRole);
+            userRoleMapper.insert(userRole);
         }
     }
 
@@ -104,7 +104,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public Result deleteUserByIds(List<Integer> userIdList) {
-        int i = userMapper.updateIsDeleteByUidList(userIdList);
+        int i = userMapper.updateIsDeleteByIdList(userIdList);
         if (i > 0) {
             return Result.ok("用户删除成功");
         }
@@ -117,7 +117,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public Result updateUserName(User user) {
-        int i = userMapper.updateUserName(user);
+        int i = userMapper.updateNameById(user);
         if (i > 0) {
             return Result.ok("修改用户姓名成功！");
         }
@@ -130,7 +130,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Result resetUserPassword(User user) {
         user.setUserPwd(DigestUtil.hmacSign("123456"));
-        int i = userMapper.updateUserPassword(user);
+        int i = userMapper.updatePasswordById(user);
         if (i > 0) {
             return Result.ok("重置用户密码成功！");
         }

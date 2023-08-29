@@ -26,8 +26,8 @@ public class ProductServiceImpl implements ProductService {
      */
     @Override
     public Page selectProductPage(Page page, Product product) {
-        Integer count = productMapper.selectProductRowCount(product);
-        List<Product> productList = productMapper.selectProductList(page, product);
+        Integer count = productMapper.countTotal(product);
+        List<Product> productList = productMapper.selectPage(page, product);
         page.setTotalNum(count);
         page.setResultList(productList);
         return page;
@@ -39,12 +39,12 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Result saveProduct(Product product) {
         // 判断商品的型号是否存在
-        Product selcetProduct = productMapper.selectProductByNum(product.getProductNum());
+        Product selcetProduct = productMapper.selectByNum(product.getProductNum());
         if (selcetProduct != null) {
             return Result.err(Result.CODE_ERR_BUSINESS, "商品型号已存在！");
         }
         product.setImgs(fileAccessPath + "/" + product.getImgs());
-        int i = productMapper.insertProduct(product);
+        int i = productMapper.insert(product);
         if (i > 0) {
             return Result.ok("商品添加成功！");
         }
@@ -56,7 +56,7 @@ public class ProductServiceImpl implements ProductService {
      */
     @Override
     public Result updateProductStateByPid(Product product) {
-        int i = productMapper.updateProductStateByPid(product.getProductId(), product.getUpDownState());
+        int i = productMapper.updateStateById(product.getProductId(), product.getUpDownState());
         if (i > 0) {
             return Result.ok("商品状态修改成功！");
         }
@@ -68,7 +68,7 @@ public class ProductServiceImpl implements ProductService {
      */
     @Override
     public Result deleteProductByPidList(List<Integer> productIdList) {
-        int i = productMapper.deleteProductByPidList(productIdList);
+        int i = productMapper.deleteByIdList(productIdList);
         if (i > 0) {
             return Result.ok("商品删除成功！");
         }
@@ -81,7 +81,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Result updateProductById(Product product) {
         // 判断修改后的型号是否存在
-        Product selectProduct = productMapper.selectProductByNum(product.getProductNum());
+        Product selectProduct = productMapper.selectByNum(product.getProductNum());
         if (selectProduct != null && !selectProduct.getProductId().equals(product.getProductId())) {
             return Result.err(Result.CODE_ERR_BUSINESS, "商品型号已经存在，修改失败！");
         }
@@ -90,7 +90,7 @@ public class ProductServiceImpl implements ProductService {
             product.setImgs(fileAccessPath + product.getImgs());
         }
         // 修改商品
-        int i = productMapper.updateProductByPid(product);
+        int i = productMapper.updateById(product);
         if (i > 0) {
             return Result.ok("商品修改成功！");
         }

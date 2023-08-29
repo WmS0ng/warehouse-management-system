@@ -13,12 +13,12 @@ public interface UserRoleMapper {
     /**
      * 根据用户id删除用户已分配的用户角色关系
      */
-    int deleteUserRoleByUid(Integer userId);
+    int deleteByUserId(Integer userId);
 
     /**
      * 添加用户角色关系的方法
      */
-    int insertUserRole(UserRole userRole);
+    int insert(UserRole userRole);
 }
 
 

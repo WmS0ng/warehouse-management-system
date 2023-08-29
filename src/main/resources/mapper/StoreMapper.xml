@@ -5,7 +5,7 @@
 <mapper namespace="com.example.warehouse.mapper.StoreMapper">
 
     <!-- 查询所有仓库 -->
-    <select id="selectAllStore" resultType="com.example.warehouse.entity.Store">
+    <select id="selectList" resultType="com.example.warehouse.entity.Store">
         select *
         from store
     </select>

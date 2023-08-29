@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.warehouse.mapper.SupplyMapper">
     <!-- 查询所有供应商 -->
-    <select id="selectALlSupply" resultType="com.example.warehouse.entity.Supply">
+    <select id="selectList" resultType="com.example.warehouse.entity.Supply">
         select *
         from supply
         where is_delete = 0

@@ -12,7 +12,7 @@ public interface PurchaseMapper {
     /**
      * 添加采购单
      */
-    int insertPurchase(Purchase purchase);
+    int insert(Purchase purchase);
 }
 
 

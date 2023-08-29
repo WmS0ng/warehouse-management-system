@@ -36,7 +36,7 @@ public class AuthServiceImpl implements AuthService {
             return JSON.parseArray(authTreeJson, Auth.class);
         }
         // redis中不存在在从mysql中查找
-        List<Auth> authList = authMapper.selectAuthListByUid(userId);
+        List<Auth> authList = authMapper.selectListById(userId);
         // 将查找出来的authList转换成authTree
         List<Auth> authTree = allAuthListToAuthTreeList(authList, 0);
         // 存入redis中一份，方便下次查询
@@ -50,7 +50,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     @Cacheable("'all:authTreeList'")
     public List<Auth> selectAuthTree() {
-        List<Auth> authList = authMapper.selectAuth();
+        List<Auth> authList = authMapper.selectList();
 
         return allAuthListToAuthTreeList(authList, 0);
     }
@@ -60,7 +60,7 @@ public class AuthServiceImpl implements AuthService {
      */
     @Override
     public List<Integer> selectAuthIdListByRid(Integer roleId) {
-        return roleAuthMapper.selectAuthIdListByRid(roleId);
+        return roleAuthMapper.selectIdListByRoleId(roleId);
     }
 
     private List<Auth> allAuthListToAuthTreeList(List<Auth> authList, Integer pid) {

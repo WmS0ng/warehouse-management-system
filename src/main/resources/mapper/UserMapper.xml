@@ -4,18 +4,18 @@
 
 <mapper namespace="com.example.warehouse.mapper.UserMapper">
     <!-- 插入用户 -->
-    <insert id="insertUser">
+    <insert id="insert">
         insert into user_info
         values (null, #{userCode}, #{userName}, #{userPwd}, null, 0, 0, #{createBy}, now(), null, null)
     </insert>
     <!-- 根据用户id修改用户状态 -->
-    <update id="updateStateByUid">
+    <update id="updateStateById">
         update user_info
         set user_state = #{userState}
         where user_id = #{userId}
     </update>
     <!-- 根据ids修改用户的删除状态 -->
-    <update id="updateIsDeleteByUidList">
+    <update id="updateIsDeleteByIdList">
         update user_info
         set is_delete = 1
         where user_id in
@@ -24,7 +24,7 @@
         </foreach>
     </update>
     <!-- 根据用户id修改用户昵称 -->
-    <update id="updateUserName">
+    <update id="updateNameById">
         update user_info
         set user_name   = #{userName},
             update_by   = #{updateBy},
@@ -32,20 +32,20 @@
         where user_id = #{userId}
     </update>
     <!-- 修改用户密码 -->
-    <update id="updateUserPassword">
+    <update id="updatePasswordById">
         update user_info
         set user_pwd = #{userPwd}
         where user_id = #{userId}
     </update>
     <!-- 根据账号查询用户信息的方法 -->
-    <select id="selectUserByCode" resultType="user">
+    <select id="selectByCode" resultType="user">
         select *
         from user_info
         where user_code = #{user_code}
           and is_delete = 0
     </select>
     <!-- 查总用户数量 -->
-    <select id="selectUserRowCount" resultType="java.lang.Integer">
+    <select id="countTotal" resultType="java.lang.Integer">
         select count(*)
         from user_info
         <!-- 当第一条件不存在时，where标签可以去掉第一个and -->
@@ -63,7 +63,7 @@
         </where>
     </select>
     <!-- 查询用户列表 -->
-    <select id="selectUserList" resultType="com.example.warehouse.entity.User">
+    <select id="selectPage" resultType="com.example.warehouse.entity.User">
         select t1.*, t2.user_code get_code
         from user_info t1, user_info t2
         where t1.create_by = t2.user_id

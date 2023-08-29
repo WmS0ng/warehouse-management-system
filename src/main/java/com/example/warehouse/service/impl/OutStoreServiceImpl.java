@@ -17,7 +17,7 @@ public class OutStoreServiceImpl implements OutStoreService {
      */
     @Override
     public Result insertOutStore(OutStore outStore) {
-        int i = outStoreMapper.insertOutStore(outStore);
+        int i = outStoreMapper.insert(outStore);
         if (i > 0) {
             return Result.ok("出库单添加成功！");
         }

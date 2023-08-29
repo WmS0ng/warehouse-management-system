@@ -22,6 +22,6 @@ public class UnitServiceImpl implements UnitService {
     @Cacheable(key = "'all:unit'")
     @Override
     public List<Unit> selectAllUnit() {
-        return unitMapper.selectAllUnit();
+        return unitMapper.selectList();
     }
 }

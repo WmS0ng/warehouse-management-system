@@ -12,7 +12,7 @@ public interface OutStoreMapper {
     /**
      * 添加出库单
      */
-    int insertOutStore(OutStore outStore);
+    int insert(OutStore outStore);
 }
 
 

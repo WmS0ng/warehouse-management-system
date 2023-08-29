@@ -14,7 +14,7 @@ public interface SupplyMapper {
     /**
      * 查询所有供应商
      */
-    List<Supply> selectALlSupply();
+    List<Supply> selectList();
 }
 
 
