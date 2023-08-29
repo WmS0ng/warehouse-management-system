@@ -37,6 +37,12 @@ public interface ProductMapper {
      * 根据商品id修改商品上下架状态
      */
     int updateProductStateByPid(@Param("productId") Integer productId, @Param("upDownState") String upDownState);
+
+    /**
+     * 根据商品id删除商品
+     */
+    int deleteProductByPidList(List<Integer> productIdList);
+
 }
 
 

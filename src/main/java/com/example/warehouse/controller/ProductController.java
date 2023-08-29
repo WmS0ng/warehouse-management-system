@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -146,5 +147,23 @@ public class ProductController {
     @RequestMapping("/state-change")
     public Result changeProductState(@RequestBody Product product) {
         return productService.updateProductStateByPid(product);
+    }
+
+    /**
+     * 删除单个商品
+     */
+    @RequestMapping("/product-delete/{productId}")
+    public Result deleteProduct(@PathVariable Integer productId) {
+        ArrayList<Integer> productIdList = new ArrayList<>();
+        productIdList.add(productId);
+        return productService.deleteProductByPidList(productIdList);
+    }
+
+    /**
+     * 批量删除商品
+     */
+    @RequestMapping("/product-list-delete")
+    public Result deleteProductList(@RequestBody List<Integer> productIdList) {
+        return productService.deleteProductByPidList(productIdList);
     }
 }

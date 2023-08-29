@@ -62,4 +62,16 @@ public class ProductServiceImpl implements ProductService {
         }
         return Result.err(Result.CODE_ERR_BUSINESS, "商品状态修改失败！");
     }
+
+    /**
+     * 删除商品
+     */
+    @Override
+    public Result deleteProductByPidList(List<Integer> productIdList) {
+        int i = productMapper.deleteProductByPidList(productIdList);
+        if (i > 0) {
+            return Result.ok("商品删除成功！");
+        }
+        return Result.err(Result.CODE_ERR_BUSINESS, "商品删除失败！");
+    }
 }

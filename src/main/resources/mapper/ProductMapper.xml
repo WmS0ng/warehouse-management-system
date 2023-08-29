@@ -16,6 +16,15 @@
         set up_down_state = #{upDownState}
         where product_id = #{productId}
     </update>
+    <!-- 根据id删除商品 -->
+    <delete id="deleteProductByPidList">
+        delete
+        from product
+        where product_id in
+        <foreach collection="list" open="(" close=")" separator="," item="productId">
+            #{productId}
+        </foreach>
+    </delete>
     <!-- 查询商品行数 -->
     <select id="selectProductRowCount" resultType="java.lang.Integer">
         select count(*)
