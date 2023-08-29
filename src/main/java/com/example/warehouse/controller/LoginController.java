@@ -88,7 +88,7 @@ public class LoginController {
             return Result.err(Result.CODE_ERR_BUSINESS, "验证码不正确！");
         }
         // 查询数据库
-        User user = userService.selectUserByCode(loginUser.getUserCode());
+        User user = userService.selectByCode(loginUser.getUserCode());
         // 用户不存在
         if (user == null) {
             return Result.err(Result.CODE_ERR_BUSINESS, "账号不存在！");
@@ -126,11 +126,11 @@ public class LoginController {
      * 加载用户权限菜单树的url接口/user/auth-list
      */
     @RequestMapping("/user/auth-list")
-    public Result loadAuthTree(@RequestHeader(WarehouseConstants.HEADER_TOKEN_NAME) String token) {
+    public Result userAuthList(@RequestHeader(WarehouseConstants.HEADER_TOKEN_NAME) String token) {
         // 从token中拿到当前用户的id
         int userId = tokenUtils.getCurrentUser(token).getUserId();
         // 查询树形权限菜单并返回
-        List<Auth> authTree = authService.selectAuthTreeByUid(userId);
+        List<Auth> authTree = authService.selectTreeListByUserId(userId);
         return Result.ok(authTree);
     }
 

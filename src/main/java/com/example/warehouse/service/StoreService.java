@@ -8,5 +8,5 @@ public interface StoreService {
     /**
      * 查询所有仓库
      */
-    List<Store> selectAllStore();
+    List<Store> selectList();
 }

@@ -19,8 +19,8 @@ public class AuthController {
      * 查询所有菜单树
      */
     @RequestMapping("/auth-tree")
-    public Result loadAllAuthTree() {
-        List<Auth> authTreeList = authService.selectAuthTree();
+    public Result authTree() {
+        List<Auth> authTreeList = authService.selectTreeList();
         return Result.ok(authTreeList);
     }
 }

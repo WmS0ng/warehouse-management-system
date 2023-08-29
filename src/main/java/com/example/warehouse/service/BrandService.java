@@ -8,5 +8,5 @@ public interface BrandService {
     /**
      * 查询所有品牌
      */
-    List<Brand> selectAllBrand();
+    List<Brand> selectList();
 }

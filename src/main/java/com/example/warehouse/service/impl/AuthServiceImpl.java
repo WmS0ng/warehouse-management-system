@@ -29,14 +29,14 @@ public class AuthServiceImpl implements AuthService {
      * 查询用户菜单树
      */
     @Override
-    public List<Auth> selectAuthTreeByUid(Integer userId) {
+    public List<Auth> selectTreeListByUserId(Integer userId) {
         // 先从redis中查找
         String authTreeJson = stringRedisTemplate.opsForValue().get("authTree" + userId);
         if (StringUtils.hasText(authTreeJson)) {
             return JSON.parseArray(authTreeJson, Auth.class);
         }
         // redis中不存在在从mysql中查找
-        List<Auth> authList = authMapper.selectListById(userId);
+        List<Auth> authList = authMapper.selectListByUserId(userId);
         // 将查找出来的authList转换成authTree
         List<Auth> authTree = allAuthListToAuthTreeList(authList, 0);
         // 存入redis中一份，方便下次查询
@@ -49,7 +49,7 @@ public class AuthServiceImpl implements AuthService {
      */
     @Override
     @Cacheable("'all:authTreeList'")
-    public List<Auth> selectAuthTree() {
+    public List<Auth> selectTreeList() {
         List<Auth> authList = authMapper.selectList();
 
         return allAuthListToAuthTreeList(authList, 0);
@@ -59,7 +59,7 @@ public class AuthServiceImpl implements AuthService {
      * 根据roleId查询authIdList
      */
     @Override
-    public List<Integer> selectAuthIdListByRid(Integer roleId) {
+    public List<Integer> selectIdListByRoleId(Integer roleId) {
         return roleAuthMapper.selectIdListByRoleId(roleId);
     }
 

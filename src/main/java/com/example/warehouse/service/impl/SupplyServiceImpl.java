@@ -21,7 +21,7 @@ public class SupplyServiceImpl implements SupplyService {
      */
     @Override
     @Cacheable(key = "'all:supply'")
-    public List<Supply> selectAllSupply() {
+    public List<Supply> selectList() {
         return supplyMapper.selectList();
     }
 }

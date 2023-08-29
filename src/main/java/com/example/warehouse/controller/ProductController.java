@@ -45,7 +45,7 @@ public class ProductController {
      */
     @RequestMapping("/store-list")
     public Result storeList() {
-        List<Store> storeList = storeService.selectAllStore();
+        List<Store> storeList = storeService.selectList();
         return Result.ok(storeList);
     }
 
@@ -54,7 +54,7 @@ public class ProductController {
      */
     @RequestMapping("/brand-list")
     public Result brandList() {
-        List<Brand> brandList = brandService.selectAllBrand();
+        List<Brand> brandList = brandService.selectList();
         return Result.ok(brandList);
     }
 
@@ -62,8 +62,8 @@ public class ProductController {
      * 分页查询商品
      */
     @RequestMapping("/product-page-list")
-    public Result productListPage(Page page, Product product) {
-        page = productService.selectProductPage(page, product);
+    public Result productPageList(Page page, Product product) {
+        page = productService.selectPage(page, product);
 
         return Result.ok(page);
     }
@@ -72,8 +72,8 @@ public class ProductController {
      * 查询所有商品分类树
      */
     @RequestMapping("/category-tree")
-    public Result loadTypeTree() {
-        List<ProductType> productTypeService = this.productTypeService.productTypeTree();
+    public Result categoryTree() {
+        List<ProductType> productTypeService = this.productTypeService.selectTreeList();
         return Result.ok(productTypeService);
     }
 
@@ -82,7 +82,7 @@ public class ProductController {
      */
     @RequestMapping("/supply-list")
     public Result supplyList() {
-        List<Supply> supplyList = supplyService.selectAllSupply();
+        List<Supply> supplyList = supplyService.selectList();
         return Result.ok(supplyList);
     }
 
@@ -91,7 +91,7 @@ public class ProductController {
      */
     @RequestMapping("/place-list")
     public Result placeList() {
-        List<Place> placeList = placeService.selectAllPlace();
+        List<Place> placeList = placeService.selectList();
         return Result.ok(placeList);
     }
 
@@ -100,7 +100,7 @@ public class ProductController {
      */
     @RequestMapping("/unit-list")
     public Result unitList() {
-        List<Unit> unitList = unitService.selectAllUnit();
+        List<Unit> unitList = unitService.selectList();
         return Result.ok(unitList);
     }
 
@@ -113,7 +113,7 @@ public class ProductController {
      */
     @RequestMapping("/img-upload")
     @CrossOrigin // 接口允许被跨域请求
-    public Result uploadImage(MultipartFile file) {
+    public Result imgUpload(MultipartFile file) {
         try {
             // 拿到图片上传到目录路径的磁盘路径
             File uploadDirFile = ResourceUtils.getFile(uploadPath);
@@ -135,45 +135,45 @@ public class ProductController {
      * 添加商品
      */
     @RequestMapping("/product-add")
-    public Result addProduct(@RequestBody Product product, @RequestHeader(WarehouseConstants.HEADER_TOKEN_NAME) String token) {
+    public Result productAdd(@RequestBody Product product, @RequestHeader(WarehouseConstants.HEADER_TOKEN_NAME) String token) {
         CurrentUser currentUser = tokenUtils.getCurrentUser(token);
         product.setCreateBy(currentUser.getUserId());
-        return productService.saveProduct(product);
+        return productService.insert(product);
     }
 
     /**
      * 修改商品上架状态
      */
     @RequestMapping("/state-change")
-    public Result changeProductState(@RequestBody Product product) {
-        return productService.updateProductStateByPid(product);
+    public Result stateChange(@RequestBody Product product) {
+        return productService.updateState(product);
     }
 
     /**
      * 删除单个商品
      */
     @RequestMapping("/product-delete/{productId}")
-    public Result deleteProduct(@PathVariable Integer productId) {
+    public Result productDelete(@PathVariable Integer productId) {
         ArrayList<Integer> productIdList = new ArrayList<>();
         productIdList.add(productId);
-        return productService.deleteProductByPidList(productIdList);
+        return productService.deleteByIdList(productIdList);
     }
 
     /**
      * 批量删除商品
      */
     @RequestMapping("/product-list-delete")
-    public Result deleteProductList(@RequestBody List<Integer> productIdList) {
-        return productService.deleteProductByPidList(productIdList);
+    public Result productListDelete(@RequestBody List<Integer> productIdList) {
+        return productService.deleteByIdList(productIdList);
     }
 
     /**
      * 修改商品
      */
     @RequestMapping("/product-update")
-    public Result updateProduct(@RequestBody Product product, @RequestHeader(WarehouseConstants.HEADER_TOKEN_NAME) String token) {
+    public Result productUpdate(@RequestBody Product product, @RequestHeader(WarehouseConstants.HEADER_TOKEN_NAME) String token) {
         CurrentUser currentUser = tokenUtils.getCurrentUser(token);
         product.setUpdateBy(currentUser.getUserId());
-        return productService.updateProductById(product);
+        return productService.update(product);
     }
 }

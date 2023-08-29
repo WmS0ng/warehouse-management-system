@@ -28,13 +28,13 @@ public class UserServiceImpl implements UserService {
     private UserRoleMapper userRoleMapper;
 
     @Override
-    public User selectUserByCode(String userCode) {
+    public User selectByCode(String userCode) {
         return userMapper.selectByCode(userCode);
     }
 
     @Override
     @Transactional
-    public Page selectUserPage(Page page, User user) {
+    public Page selectPage(Page page, User user) {
         // 查询总用户数量
         Integer count = userMapper.countTotal(user);
         // 分页查询
@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Result insertUser(User user) {
+    public Result insert(User user) {
         // 判断账号是否已存在
         User u = userMapper.selectByCode(user.getUserCode());
         // 账号已存在
@@ -73,7 +73,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public Result updateState(User user) {
-        int i = userMapper.updateStateById(user.getUserId(), user.getUserState());
+        int i = userMapper.updateState(user.getUserId(), user.getUserState());
         if (i > 0) {
             return Result.ok("启用或禁用成功！");
         }
@@ -103,7 +103,7 @@ public class UserServiceImpl implements UserService {
      * 批量删除用户
      */
     @Override
-    public Result deleteUserByIds(List<Integer> userIdList) {
+    public Result deleteByIds(List<Integer> userIdList) {
         int i = userMapper.updateIsDeleteByIdList(userIdList);
         if (i > 0) {
             return Result.ok("用户删除成功");
@@ -116,8 +116,8 @@ public class UserServiceImpl implements UserService {
      * 修改userName
      */
     @Override
-    public Result updateUserName(User user) {
-        int i = userMapper.updateNameById(user);
+    public Result updateName(User user) {
+        int i = userMapper.updateName(user);
         if (i > 0) {
             return Result.ok("修改用户姓名成功！");
         }
@@ -128,9 +128,9 @@ public class UserServiceImpl implements UserService {
      * 初始化userPwd
      */
     @Override
-    public Result resetUserPassword(User user) {
+    public Result updatePassword(User user) {
         user.setUserPwd(DigestUtil.hmacSign("123456"));
-        int i = userMapper.updatePasswordById(user);
+        int i = userMapper.updatePassword(user);
         if (i > 0) {
             return Result.ok("重置用户密码成功！");
         }

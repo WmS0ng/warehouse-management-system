@@ -7,5 +7,5 @@ public interface OutStoreService {
     /**
      * 添加出库单
      */
-    Result insertOutStore(OutStore outStore);
+    Result insert(OutStore outStore);
 }

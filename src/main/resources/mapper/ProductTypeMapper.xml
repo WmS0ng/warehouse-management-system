@@ -9,7 +9,7 @@
         values (null, #{parentId}, #{typeCode}, #{typeName}, #{typeDesc})
     </insert>
     <!-- 根据id修改商品分类 -->
-    <update id="updateById">
+    <update id="update">
         update product_type
         set type_name = #{typeName},
             type_desc = #{typeDesc}

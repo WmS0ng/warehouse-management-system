@@ -10,25 +10,25 @@ public interface ProductService {
     /**
      * 分页查询商品
      */
-    Page selectProductPage(Page page, Product product);
+    Page selectPage(Page page, Product product);
 
     /**
      * 添加商品
      */
-    Result saveProduct(Product product);
+    Result insert(Product product);
 
     /**
      * 根据商品id修改商品状态
      */
-    Result updateProductStateByPid(Product product);
+    Result updateState(Product product);
 
     /**
      * 删除商品
      */
-    Result deleteProductByPidList(List<Integer> productIdList);
+    Result deleteByIdList(List<Integer> productIdList);
 
     /**
      * 修改商品
      */
-    Result updateProductById(Product product);
+    Result update(Product product);
 }

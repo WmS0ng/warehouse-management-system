@@ -15,17 +15,17 @@ public interface UserService {
     /**
      * 根据账号查询用户
      */
-    User selectUserByCode(String userCode);
+    User selectByCode(String userCode);
 
     /**
      * 分页查询用户
      */
-    Page selectUserPage(Page page, User user);
+    Page selectPage(Page page, User user);
 
     /**
      * 插入用户
      */
-    Result insertUser(User user);
+    Result insert(User user);
 
     /**
      * 启用或禁用用户
@@ -40,16 +40,16 @@ public interface UserService {
     /**
      * 批量删除用户
      */
-    Result deleteUserByIds(List<Integer> userIdList);
+    Result deleteByIds(List<Integer> userIdList);
 
 
     /**
      * 修改userName
      */
-    Result updateUserName(User user);
+    Result updateName(User user);
 
     /**
      * 初始化userPwd
      */
-    Result resetUserPassword(User user);
+    Result updatePassword(User user);
 }

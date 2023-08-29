@@ -34,7 +34,7 @@ public interface ProductTypeMapper {
     /**
      * 根据id修改商品分类
      */
-    int updateById(ProductType productType);
+    int update(ProductType productType);
 }
 
 

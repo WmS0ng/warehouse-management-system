@@ -33,7 +33,7 @@ public interface UserMapper {
     /**
      * 根据用户id修改用户状态
      */
-    int updateStateById(@Param("userId") Integer userId, @Param("userState") String userState);
+    int updateState(@Param("userId") Integer userId, @Param("userState") String userState);
 
     /**
      * 根据ids修改用户的删除状态
@@ -43,10 +43,10 @@ public interface UserMapper {
     /**
      * 根据用户id修改用户昵称
      */
-    int updateNameById(User user);
+    int updateName(User user);
 
     /**
      * 修改用户密码
      */
-    int updatePasswordById(User user);
+    int updatePassword(User user);
 }

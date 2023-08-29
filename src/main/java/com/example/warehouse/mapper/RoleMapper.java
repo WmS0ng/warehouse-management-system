@@ -52,7 +52,7 @@ public interface RoleMapper {
     /**
      * 根据角色id修改角色状态
      */
-    int updateStateById(@Param("roleId") Integer roleId, @Param("roleState") String roleState);
+    int updateState(@Param("roleId") Integer roleId, @Param("roleState") String roleState);
 
     /**
      * 根据角色id删除角色
@@ -62,5 +62,5 @@ public interface RoleMapper {
     /**
      * 根据角色id修改角色描述
      */
-    int updateDescById(Role role);
+    int updateDesc(Role role);
 }

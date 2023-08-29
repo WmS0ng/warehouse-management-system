@@ -29,7 +29,7 @@ public class RoleController {
      */
     @RequestMapping("/role-list")
     public Result roleList() {
-        List<Role> roleList = roleService.selectAllRole();
+        List<Role> roleList = roleService.selectList();
         return Result.ok(roleList);
     }
 
@@ -37,8 +37,8 @@ public class RoleController {
      * 分页查询所有角色
      */
     @RequestMapping("/role-page-list")
-    public Result roleListPage(Page page, Role role) {
-        page = roleService.selectRolePage(page, role);
+    public Result rolePageList(Page page, Role role) {
+        page = roleService.selectPage(page, role);
         return Result.ok(page);
     }
 
@@ -46,35 +46,34 @@ public class RoleController {
      * 添加角色的接口
      */
     @RequestMapping("/role-add")
-    public Result addRole(@RequestBody Role role, @RequestHeader(WarehouseConstants.HEADER_TOKEN_NAME) String token) {
+    public Result roleAdd(@RequestBody Role role, @RequestHeader(WarehouseConstants.HEADER_TOKEN_NAME) String token) {
         CurrentUser currentUser = tokenUtils.getCurrentUser(token);
         role.setCreateBy(currentUser.getUserId());
-        return roleService.insertRole(role);
+        return roleService.insert(role);
     }
 
     /**
      * 启用或禁用角色
      */
     @RequestMapping("/role-state-update")
-    public Result updateRoleStateByRid(@RequestBody Role role) {
-        return roleService.updateRoleStateByRid(role);
+    public Result roleStateUpdate(@RequestBody Role role) {
+        return roleService.updateState(role);
     }
 
     /**
      * 根据角色id删除角色
      */
     @RequestMapping("/role-delete/{roleId}")
-    public Result deleteRoleByRid(@PathVariable Integer roleId) {
-        return roleService.deleteRoleByRid(roleId);
+    public Result roleDelete(@PathVariable Integer roleId) {
+        return roleService.deleteById(roleId);
     }
 
     /**
      * 根据角色id查询权限
      */
     @RequestMapping("/role-auth")
-    public Result selectAuthByRid(Integer roleId) {
-        List<Integer> authIdList = authService.selectAuthIdListByRid(roleId);
-
+    public Result roleAuth(Integer roleId) {
+        List<Integer> authIdList = authService.selectIdListByRoleId(roleId);
         return Result.ok(authIdList);
     }
 
@@ -82,8 +81,8 @@ public class RoleController {
      * 给角色分配权限
      */
     @RequestMapping("/auth-grant")
-    public Result grantAuth(@RequestBody AssignAuthDto assignAuthDto) {
-        roleService.insertRoleAuth(assignAuthDto);
+    public Result authGrant(@RequestBody AssignAuthDto assignAuthDto) {
+        roleService.assignAuth(assignAuthDto);
         return Result.ok("权限分配成功！");
     }
 
@@ -91,9 +90,9 @@ public class RoleController {
      * 修改角色
      */
     @RequestMapping("/role-update")
-    public Result updateRole(@RequestBody Role role, @RequestHeader(WarehouseConstants.HEADER_TOKEN_NAME) String token) {
+    public Result roleUpdate(@RequestBody Role role, @RequestHeader(WarehouseConstants.HEADER_TOKEN_NAME) String token) {
         CurrentUser currentUser = tokenUtils.getCurrentUser(token);
         role.setUpdateBy(currentUser.getUserId());
-        return roleService.updateRoleByRid(role);
+        return roleService.update(role);
     }
 }

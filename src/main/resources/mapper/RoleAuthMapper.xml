@@ -9,7 +9,7 @@
         values (null, #{roleId}, #{authId})
     </insert>
     <!-- 根据角色id删除角色关系 -->
-    <delete id="deleteById">
+    <delete id="deleteByRoleId">
         delete
         from role_auth
         where role_id = #{roleId}

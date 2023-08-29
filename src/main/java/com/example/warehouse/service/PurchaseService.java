@@ -7,5 +7,5 @@ public interface PurchaseService {
     /**
      * 添加采购单
      */
-    Result insertPurchase(Purchase purchase);
+    Result insert(Purchase purchase);
 }

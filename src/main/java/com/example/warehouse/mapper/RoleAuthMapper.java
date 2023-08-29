@@ -14,7 +14,7 @@ public interface RoleAuthMapper {
     /**
      * 根据角色id删除角色关系
      */
-    int deleteById(Integer roleId);
+    int deleteByRoleId(Integer roleId);
 
     /**
      * 根据roleId查询权限id

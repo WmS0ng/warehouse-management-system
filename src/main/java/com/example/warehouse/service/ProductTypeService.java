@@ -9,7 +9,7 @@ public interface ProductTypeService {
     /**
      * 查询所有商品分类树
      */
-    List<ProductType> productTypeTree();
+    List<ProductType> selectTreeList();
 
     /**
      * 校验分类编码是否存在
@@ -19,15 +19,15 @@ public interface ProductTypeService {
     /**
      * 添加商品分类
      */
-    Result saveProductType(ProductType productType);
+    Result insert(ProductType productType);
 
     /**
      * 删除商品分类
      */
-    Result deleteProductType(Integer typeId);
+    Result deleteById(Integer typeId);
 
     /**
      * 修改商品分类
      */
-    Result updateById(ProductType productType);
+    Result update(ProductType productType);
 }

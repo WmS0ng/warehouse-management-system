@@ -22,7 +22,7 @@ public class ProductTypeController {
      */
     @RequestMapping("/product-category-tree")
     public Result productTypeTree() {
-        List<ProductType> productTypeTree = productTypeService.productTypeTree();
+        List<ProductType> productTypeTree = productTypeService.selectTreeList();
         return Result.ok(productTypeTree);
     }
 
@@ -30,7 +30,7 @@ public class ProductTypeController {
      * 校验分类编码是否存在
      */
     @RequestMapping("/verify-type-code")
-    public Result checkTypeCode(String typeCode) {
+    public Result verifyTypeCode(String typeCode) {
         ProductType productType = new ProductType();
         productType.setTypeCode(typeCode);
         return productTypeService.checkTypeCode(productType);
@@ -40,23 +40,23 @@ public class ProductTypeController {
      * 添加商品分类
      */
     @RequestMapping("/type-add")
-    public Result addProductType(@RequestBody ProductType productType) {
-        return productTypeService.saveProductType(productType);
+    public Result typeAdd(@RequestBody ProductType productType) {
+        return productTypeService.insert(productType);
     }
 
     /**
      * 删除商品分类
      */
     @RequestMapping("/type-delete/{typeId}")
-    public Result deleteProductType(@PathVariable Integer typeId) {
-        return productTypeService.deleteProductType(typeId);
+    public Result typeDelete(@PathVariable Integer typeId) {
+        return productTypeService.deleteById(typeId);
     }
 
     /**
      * 修改商品分类
      */
     @RequestMapping("/type-update")
-    public Result updateProductType(@RequestBody ProductType productType) {
-        return productTypeService.updateById(productType);
+    public Result typeUpdate(@RequestBody ProductType productType) {
+        return productTypeService.update(productType);
     }
 }

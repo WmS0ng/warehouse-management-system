@@ -25,7 +25,7 @@ public class ProductTypeServiceImpl implements ProductTypeService {
      */
     @Cacheable(key = "'all:typeTree'")
     @Override
-    public List<ProductType> productTypeTree() {
+    public List<ProductType> selectTreeList() {
         List<ProductType> productTypeList = productTypeMapper.selectList();
         List<ProductType> productTypeTree = allTypeToTypeTree(productTypeList, 0);
 
@@ -47,7 +47,7 @@ public class ProductTypeServiceImpl implements ProductTypeService {
     @Override
     @Transactional
     @CacheEvict(key = "'all:typeTree'")
-    public Result saveProductType(ProductType productType) {
+    public Result insert(ProductType productType) {
         ProductType tempProductType = new ProductType();
         tempProductType.setTypeName(productType.getTypeName());
         ProductType tempProductType2 = productTypeMapper.selectByCodeOrName(tempProductType);
@@ -66,7 +66,7 @@ public class ProductTypeServiceImpl implements ProductTypeService {
      */
     @Override
     @CacheEvict(key = "'all:typeTree'")
-    public Result deleteProductType(Integer typeId) {
+    public Result deleteById(Integer typeId) {
         int i = productTypeMapper.deleteById(typeId);
         if (i > 0) {
             return Result.ok("删除商品分类成功！");
@@ -79,14 +79,14 @@ public class ProductTypeServiceImpl implements ProductTypeService {
      */
     @Override
     @CacheEvict(key = "'all:typeTree'")
-    public Result updateById(ProductType productType) {
+    public Result update(ProductType productType) {
         ProductType tempProductType = new ProductType();
         tempProductType.setTypeName(productType.getTypeName());
         ProductType selectProductType = productTypeMapper.selectByCodeOrName(tempProductType);
         if (selectProductType != null && !productType.getTypeId().equals(selectProductType.getTypeId())) {
             return Result.err(Result.CODE_ERR_BUSINESS, "分类名字已经存在，无法修改！");
         }
-        int i = productTypeMapper.updateById(productType);
+        int i = productTypeMapper.update(productType);
         if (i > 0) {
             return Result.ok("商品分类修改成功！");
         }

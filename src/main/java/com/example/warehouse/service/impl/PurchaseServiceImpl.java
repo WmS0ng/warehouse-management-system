@@ -16,7 +16,7 @@ public class PurchaseServiceImpl implements PurchaseService {
      * 添加采购单
      */
     @Override
-    public Result insertPurchase(Purchase purchase) {
+    public Result insert(Purchase purchase) {
         purchase.setFactBuyNum(purchase.getBuyNum());
         int i = purchaseMapper.insert(purchase);
         if (i > 0) {

@@ -32,7 +32,7 @@ public class RoleServiceImpl implements RoleService {
      */
     @Cacheable(key = "'all:role'")
     @Override
-    public List<Role> selectAllRole() {
+    public List<Role> selectList() {
         return roleMapper.selectList();
     }
 
@@ -41,7 +41,7 @@ public class RoleServiceImpl implements RoleService {
      * 根据userId查询所有角色
      */
     @Override
-    public List<Role> selectRoleListByUid(Integer userId) {
+    public List<Role> selectListByUserId(Integer userId) {
         return roleMapper.selectListByUserId(userId);
     }
 
@@ -50,7 +50,7 @@ public class RoleServiceImpl implements RoleService {
      */
     @Override
     @Transactional
-    public Page selectRolePage(Page page, Role role) {
+    public Page selectPage(Page page, Role role) {
         Integer count = roleMapper.countTotal(role);
         List<Role> roleList = roleMapper.selectPage(page, role);
         page.setTotalNum(count);
@@ -63,7 +63,7 @@ public class RoleServiceImpl implements RoleService {
      */
     @Override
     @CacheEvict(key = "'all:role'")
-    public Result insertRole(Role role) {
+    public Result insert(Role role) {
         // 判断角色是否存在
         Role selectRole = roleMapper.selectByNameOrCode(role.getRoleName(), role.getRoleCode());
         // 角色已存在
@@ -83,8 +83,8 @@ public class RoleServiceImpl implements RoleService {
      */
     @Override
     @CacheEvict(key = "'all:role'")
-    public Result updateRoleStateByRid(Role role) {
-        int i = roleMapper.updateStateById(role.getRoleId(), role.getRoleState());
+    public Result updateState(Role role) {
+        int i = roleMapper.updateState(role.getRoleId(), role.getRoleState());
         if (i > 0) {
             return Result.ok("启用或禁用角色成功！");
         }
@@ -97,11 +97,11 @@ public class RoleServiceImpl implements RoleService {
     @CacheEvict(key = "'all:role'")
     @Transactional
     @Override
-    public Result deleteRoleByRid(Integer roleId) {
+    public Result deleteById(Integer roleId) {
         int i = roleMapper.deleteById(roleId);
         if (i > 0) {
             // 删除角色权限关系
-            roleAuthMapper.deleteById(roleId);
+            roleAuthMapper.deleteByRoleId(roleId);
             return Result.ok("角色删除成功！");
         }
         return Result.err(Result.CODE_ERR_BUSINESS, "角色删除失败！");
@@ -112,9 +112,9 @@ public class RoleServiceImpl implements RoleService {
      */
     @Override
     @Transactional
-    public void insertRoleAuth(AssignAuthDto assignAuthDto) {
+    public void assignAuth(AssignAuthDto assignAuthDto) {
         // 删除角色之前的所有权限
-        roleAuthMapper.deleteById(assignAuthDto.getRoleId());
+        roleAuthMapper.deleteByRoleId(assignAuthDto.getRoleId());
         // 添加角色权限关系
         List<Integer> authIdList = assignAuthDto.getAuthIds();
         for (Integer authId : authIdList) {
@@ -130,8 +130,8 @@ public class RoleServiceImpl implements RoleService {
      */
     @Override
     @CacheEvict(key = "'all:role'")
-    public Result updateRoleByRid(Role role) {
-        int i = roleMapper.updateDescById(role);
+    public Result update(Role role) {
+        int i = roleMapper.updateDesc(role);
         if (i > 0) {
             return Result.ok("角色修改成功！");
         }

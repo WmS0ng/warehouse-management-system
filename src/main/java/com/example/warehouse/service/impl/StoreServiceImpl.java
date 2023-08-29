@@ -21,7 +21,7 @@ public class StoreServiceImpl implements StoreService {
      */
     @Cacheable(key = "'all:store'")
     @Override
-    public List<Store> selectAllStore() {
+    public List<Store> selectList() {
         return storeMapper.selectList();
     }
 }

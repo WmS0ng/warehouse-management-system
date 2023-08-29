@@ -24,9 +24,9 @@ public class OutStoreController {
      * 添加出库单
      */
     @RequestMapping("/outstore-add")
-    public Result addOutStore(@RequestBody OutStore outStore, @RequestHeader(WarehouseConstants.HEADER_TOKEN_NAME) String token) {
+    public Result outstoreAdd(@RequestBody OutStore outStore, @RequestHeader(WarehouseConstants.HEADER_TOKEN_NAME) String token) {
         CurrentUser currentUser = tokenUtils.getCurrentUser(token);
         outStore.setCreateBy(currentUser.getUserId());
-        return outStoreService.insertOutStore(outStore);
+        return outStoreService.insert(outStore);
     }
 }

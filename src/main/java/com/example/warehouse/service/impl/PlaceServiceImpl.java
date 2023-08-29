@@ -21,7 +21,7 @@ public class PlaceServiceImpl implements PlaceService {
      */
     @Override
     @Cacheable(key = "'all:place'")
-    public List<Place> selectAllPlace() {
+    public List<Place> selectList() {
         return placeMapper.selectList();
     }
 }

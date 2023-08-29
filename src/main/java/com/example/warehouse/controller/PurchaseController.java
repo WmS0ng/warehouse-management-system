@@ -18,7 +18,7 @@ public class PurchaseController {
      * 添加采购单
      */
     @RequestMapping("/purchase-add")
-    public Result addPurchase(@RequestBody Purchase purchase) {
-        return purchaseService.insertPurchase(purchase);
+    public Result purchaseAdd(@RequestBody Purchase purchase) {
+        return purchaseService.insert(purchase);
     }
 }

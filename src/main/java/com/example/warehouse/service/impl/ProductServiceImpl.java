@@ -25,7 +25,7 @@ public class ProductServiceImpl implements ProductService {
      * 分页查询商品
      */
     @Override
-    public Page selectProductPage(Page page, Product product) {
+    public Page selectPage(Page page, Product product) {
         Integer count = productMapper.countTotal(product);
         List<Product> productList = productMapper.selectPage(page, product);
         page.setTotalNum(count);
@@ -37,7 +37,7 @@ public class ProductServiceImpl implements ProductService {
      * 添加商品
      */
     @Override
-    public Result saveProduct(Product product) {
+    public Result insert(Product product) {
         // 判断商品的型号是否存在
         Product selcetProduct = productMapper.selectByNum(product.getProductNum());
         if (selcetProduct != null) {
@@ -55,8 +55,8 @@ public class ProductServiceImpl implements ProductService {
      * 根据商品id修改商品状态
      */
     @Override
-    public Result updateProductStateByPid(Product product) {
-        int i = productMapper.updateStateById(product.getProductId(), product.getUpDownState());
+    public Result updateState(Product product) {
+        int i = productMapper.updateState(product.getProductId(), product.getUpDownState());
         if (i > 0) {
             return Result.ok("商品状态修改成功！");
         }
@@ -67,7 +67,7 @@ public class ProductServiceImpl implements ProductService {
      * 删除商品
      */
     @Override
-    public Result deleteProductByPidList(List<Integer> productIdList) {
+    public Result deleteByIdList(List<Integer> productIdList) {
         int i = productMapper.deleteByIdList(productIdList);
         if (i > 0) {
             return Result.ok("商品删除成功！");
@@ -79,7 +79,7 @@ public class ProductServiceImpl implements ProductService {
      * 修改商品
      */
     @Override
-    public Result updateProductById(Product product) {
+    public Result update(Product product) {
         // 判断修改后的型号是否存在
         Product selectProduct = productMapper.selectByNum(product.getProductNum());
         if (selectProduct != null && !selectProduct.getProductId().equals(product.getProductId())) {
@@ -90,7 +90,7 @@ public class ProductServiceImpl implements ProductService {
             product.setImgs(fileAccessPath + product.getImgs());
         }
         // 修改商品
-        int i = productMapper.updateById(product);
+        int i = productMapper.update(product);
         if (i > 0) {
             return Result.ok("商品修改成功！");
         }

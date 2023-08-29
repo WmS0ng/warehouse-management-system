@@ -32,7 +32,7 @@ public class UserController {
      */
     @RequestMapping("/user-list")
     public Result userList(Page page, User user) {
-        page = userService.selectUserPage(page, user);
+        page = userService.selectPage(page, user);
 
         return Result.ok(page);
     }
@@ -48,14 +48,14 @@ public class UserController {
         user.setCreateBy(createBy);
 
         // 执行业务
-        return userService.insertUser(user);
+        return userService.insert(user);
     }
 
     /**
      * 启用或禁用用户
      */
     @RequestMapping("/updateState")
-    public Result updateUserState(@RequestBody User user) {
+    public Result updateState(@RequestBody User user) {
         // 执行任务
         return userService.updateState(user);
     }
@@ -65,7 +65,7 @@ public class UserController {
      */
     @RequestMapping("/user-role-list/{userId}")
     public Result userRoleList(@PathVariable Integer userId) {
-        List<Role> roleList = roleService.selectRoleListByUid(userId);
+        List<Role> roleList = roleService.selectListByUserId(userId);
 
         return Result.ok(roleList);
     }
@@ -83,36 +83,36 @@ public class UserController {
      * 根据用户id删除用户
      */
     @RequestMapping("/deleteUser/{userId}")
-    public Result deleteUserByUid(@PathVariable Integer userId) {
+    public Result deleteUser(@PathVariable Integer userId) {
         ArrayList<Integer> userIdList = new ArrayList<>();
         userIdList.add(userId);
-        return userService.deleteUserByIds(userIdList);
+        return userService.deleteByIds(userIdList);
     }
 
     /**
      * 根据用户ids批量删除用户
      */
     @RequestMapping("/deleteUserList")
-    public Result deleteUsersByUids(@RequestBody List<Integer> userIdList) {
-        return userService.deleteUserByIds(userIdList);
+    public Result deleteUserList(@RequestBody List<Integer> userIdList) {
+        return userService.deleteByIds(userIdList);
     }
 
     /**
      * 修改userName
      */
     @RequestMapping("/updateUser")
-    public Result updateUserName(@RequestBody User user, @RequestHeader(WarehouseConstants.HEADER_TOKEN_NAME) String token) {
+    public Result updateUser(@RequestBody User user, @RequestHeader(WarehouseConstants.HEADER_TOKEN_NAME) String token) {
         user.setUpdateBy(tokenUtils.getCurrentUser(token).getUserId());
-        return userService.updateUserName(user);
+        return userService.updateName(user);
     }
 
     /**
      * 重置密码
      */
     @RequestMapping("/updatePwd/{userId}")
-    public Result resetPassword(@PathVariable Integer userId) {
+    public Result updatePassword(@PathVariable Integer userId) {
         User user = new User();
         user.setUserId(userId);
-        return userService.resetUserPassword(user);
+        return userService.updatePassword(user);
     }
 }

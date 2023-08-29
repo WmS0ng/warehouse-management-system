@@ -9,13 +9,13 @@
         values (null, #{roleName}, #{roleDesc}, #{roleCode}, 0, #{createBy}, now(), null, null)
     </insert>
     <!-- 根据角色id修改角色状态 -->
-    <update id="updateStateById">
+    <update id="updateState">
         update role
         set role_state = #{roleState}
         where role_id = #{roleId}
     </update>
     <!-- 根据角色id修改角色描述 -->
-    <update id="updateDescById">
+    <update id="updateDesc">
         update role
         set role_desc   = #{roleDesc},
             update_by   = #{updateBy},

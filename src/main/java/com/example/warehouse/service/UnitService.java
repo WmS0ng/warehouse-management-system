@@ -8,5 +8,5 @@ public interface UnitService {
     /**
      * 查询所有单位
      */
-    List<Unit> selectAllUnit();
+    List<Unit> selectList();
 }
