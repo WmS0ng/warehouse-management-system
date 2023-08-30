@@ -8,6 +8,7 @@ import com.example.warehouse.service.StoreService;
 import com.example.warehouse.vo.StoreCountVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -61,6 +62,7 @@ public class StoreServiceImpl implements StoreService {
      * 添加仓库
      */
     @Override
+    @CacheEvict(key = "'all:store'")
     public Result insert(Store store) {
         int i = storeMapper.insert(store);
         if (i > 0) {
@@ -73,6 +75,7 @@ public class StoreServiceImpl implements StoreService {
      * 修改仓库
      */
     @Override
+    @CacheEvict(key = "'all:store'")
     public Result update(Store store) {
         int i = storeMapper.update(store);
         if (i > 0) {
