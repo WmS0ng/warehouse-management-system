@@ -27,6 +27,11 @@ public interface InStoreMapper {
      * 入库单分页查询
      */
     List<InStore> selectPage(@Param("page") Page page, @Param("inStore") InStore inStore);
+
+    /**
+     * 修改入库单状态
+     */
+    int updateIsIn(Integer inStoreId);
 }
 
 

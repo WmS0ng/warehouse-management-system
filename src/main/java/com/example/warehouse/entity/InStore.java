@@ -1,5 +1,6 @@
 package com.example.warehouse.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.io.Serial;
@@ -19,6 +20,7 @@ public class InStore implements Serializable {
     private Integer productId;
     private Integer inNum;
     private Integer createBy;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
     private String isIn;
     // 追加属性

@@ -8,6 +8,12 @@
         insert into in_store
         values (null, #{storeId}, #{productId}, #{inNum}, #{createBy}, now(), 0)
     </insert>
+    <!-- 修改入库单状态 -->
+    <update id="updateIsIn">
+        update in_store
+        set is_in = 1
+        where ins_id = #{inStoreId}
+    </update>
     <!-- 查询入库总行数 -->
     <select id="countTotal" resultType="java.lang.Integer">
         select count(*)

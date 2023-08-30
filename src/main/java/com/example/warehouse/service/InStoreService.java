@@ -14,4 +14,9 @@ public interface InStoreService {
      * 分页查询入库单
      */
     Page selectPage(Page page, InStore inStore);
+
+    /**
+     * 确认入库
+     */
+    Result inStoreConfirm(InStore inStore);
 }

@@ -7,6 +7,7 @@ import com.example.warehouse.result.Result;
 import com.example.warehouse.service.InStoreService;
 import com.example.warehouse.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,5 +37,13 @@ public class InStoreController {
     public Result instorePageList(Page page, InStore inStore) {
         page = inStoreService.selectPage(page, inStore);
         return Result.ok(page);
+    }
+
+    /**
+     * 确认入库
+     */
+    @RequestMapping("/instore-confirm")
+    public Result instoreConfirm(@RequestBody InStore inStore) {
+        return inStoreService.inStoreConfirm(inStore);
     }
 }

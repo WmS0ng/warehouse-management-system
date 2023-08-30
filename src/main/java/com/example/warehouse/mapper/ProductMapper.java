@@ -47,6 +47,11 @@ public interface ProductMapper {
      * 根据商品id修改商品方法
      */
     int update(Product product);
+
+    /**
+     * 修改商品表库存
+     */
+    int updateInvent(@Param("productId") Integer productId, @Param("invent") Integer invent);
 }
 
 

@@ -39,6 +39,12 @@
             supp_date      = #{suppDate}
         where product_id = #{productId}
     </update>
+    <!-- 修改商品库存 -->
+    <update id="updateInvent">
+        update product
+        set product_invent = product_invent + #{invent}
+        where product_id = #{productId}
+    </update>
     <!-- 根据id删除商品 -->
     <delete id="deleteByIdList">
         delete
