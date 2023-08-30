@@ -34,11 +34,12 @@ public interface PurchaseMapper {
     int deleteById(Integer buyId);
 
     /**
-     * 根据id修改预计采购数量和实际采购数量
+     * 修改预计采购数量和实际采购数量
      */
     int updateNum(Purchase purchase);
+
+    /**
+     * 修改采购单状态为已入库
+     */
+    int updateIsIn(Integer buyId);
 }
-
-
-
-

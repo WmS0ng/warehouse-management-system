@@ -1,16 +1,18 @@
 package com.example.warehouse.controller;
 
+import com.example.warehouse.dto.CurrentUser;
+import com.example.warehouse.entity.InStore;
 import com.example.warehouse.entity.Purchase;
 import com.example.warehouse.entity.Store;
 import com.example.warehouse.page.Page;
 import com.example.warehouse.result.Result;
+import com.example.warehouse.service.InStoreService;
 import com.example.warehouse.service.PurchaseService;
 import com.example.warehouse.service.StoreService;
+import com.example.warehouse.utils.TokenUtils;
+import com.example.warehouse.utils.WarehouseConstants;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,6 +23,10 @@ public class PurchaseController {
     private PurchaseService purchaseService;
     @Autowired
     private StoreService storeService;
+    @Autowired
+    private InStoreService inStoreService;
+    @Autowired
+    private TokenUtils tokenUtils;
 
     /**
      * 添加采购单
@@ -62,5 +68,19 @@ public class PurchaseController {
     @RequestMapping("/purchase-update")
     public Result purchaseUpdate(@RequestBody Purchase purchase) {
         return purchaseService.updateNum(purchase);
+    }
+
+    /**
+     * 生成入库单
+     */
+    @RequestMapping("/in-warehouse-record-add")
+    public Result inWarehouseRecordAdd(@RequestBody Purchase purchase, @RequestHeader(WarehouseConstants.HEADER_TOKEN_NAME) String token) {
+        CurrentUser currentUser = tokenUtils.getCurrentUser(token);
+        InStore inStore = new InStore();
+        inStore.setCreateBy(currentUser.getUserId());
+        inStore.setStoreId(purchase.getStoreId());
+        inStore.setProductId(purchase.getProductId());
+        inStore.setInNum(purchase.getBuyNum());
+        return inStoreService.insert(inStore, purchase.getBuyId());
     }
 }
