@@ -2,6 +2,7 @@ package com.example.warehouse.service.impl;
 
 import com.example.warehouse.entity.Store;
 import com.example.warehouse.mapper.StoreMapper;
+import com.example.warehouse.page.Page;
 import com.example.warehouse.service.StoreService;
 import com.example.warehouse.vo.StoreCountVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +33,17 @@ public class StoreServiceImpl implements StoreService {
     @Override
     public List<StoreCountVo> selectStoreCount() {
         return storeMapper.selectStoreCount();
+    }
+
+    /**
+     * 分页查询仓库
+     */
+    @Override
+    public Page selectPage(Page page, Store store) {
+        int count = storeMapper.countTotal(store);
+        List<Store> storeList = storeMapper.selectPage(page, store);
+        page.setTotalNum(count);
+        page.setResultList(storeList);
+        return page;
     }
 }

@@ -1,7 +1,9 @@
 package com.example.warehouse.mapper;
 
 import com.example.warehouse.entity.Store;
+import com.example.warehouse.page.Page;
 import com.example.warehouse.vo.StoreCountVo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -22,4 +24,14 @@ public interface StoreMapper {
      * 查询每个仓库的商品数量
      */
     List<StoreCountVo> selectStoreCount();
+
+    /**
+     * 查询仓库总行数
+     */
+    int countTotal(Store store);
+
+    /**
+     * 分页查询仓库数量
+     */
+    List<Store> selectPage(@Param("page") Page page, @Param("store") Store store);
 }

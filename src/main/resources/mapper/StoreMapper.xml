@@ -17,4 +17,44 @@
         where t1.store_id = t2.store_id
         group by t1.store_id, t1.store_name
     </select>
+    <!-- 查询仓库总行数 -->
+    <select id="countTotal" resultType="java.lang.Integer">
+        select count(*)
+        from store
+        <where>
+            <if test="storeName != null and storeName != ''">
+                and store_name like concat('%', #{storeName}, '%')
+            </if>
+            <if test="storeAddress != null and storeAddress != ''">
+                and store_address like concat('%', #{storeAddress}, '%')
+            </if>
+            <if test="concat != null and concat != ''">
+                and concat like concat('%', #{concat}, '%')
+            </if>
+            <if test="phone != null and phone != ''">
+                and phone like concat('%', #{phone}, '%')
+            </if>
+        </where>
+    </select>
+    <!-- 分页查询仓库数量 -->
+    <select id="selectPage" resultType="com.example.warehouse.entity.Store">
+        select *
+        from store
+        <where>
+            <if test="store.storeName != null and store.storeName != ''">
+                and store_name like concat('%', #{store.storeName}, '%')
+            </if>
+            <if test="store.storeAddress != null and store.storeAddress != ''">
+                and store_address like concat('%', #{store.storeAddress}, '%')
+            </if>
+            <if test="store.concat != null and store.concat != ''">
+                and concat like concat('%', #{store.concat}, '%')
+            </if>
+            <if test="store.phone != null and store.phone != ''">
+                and phone like concat('%', #{store.phone}, '%')
+            </if>
+        </where>
+        order by store_id
+        limit #{page.limitIndex}, #{page.pageSize}
+    </select>
 </mapper>
