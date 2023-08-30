@@ -44,4 +44,9 @@ public interface StoreMapper {
      * 添加仓库
      */
     int insert(Store store);
+
+    /**
+     * 修改仓库
+     */
+    int update(Store store);
 }

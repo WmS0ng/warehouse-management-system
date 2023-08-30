@@ -68,4 +68,16 @@ public class StoreServiceImpl implements StoreService {
         }
         return Result.err(Result.CODE_ERR_BUSINESS, "仓库添加失败！");
     }
+
+    /**
+     * 修改仓库
+     */
+    @Override
+    public Result update(Store store) {
+        int i = storeMapper.update(store);
+        if (i > 0) {
+            return Result.ok("仓库修改成功！");
+        }
+        return Result.err(Result.CODE_ERR_BUSINESS, "仓库修改失败！");
+    }
 }

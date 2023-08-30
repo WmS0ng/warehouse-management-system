@@ -8,7 +8,15 @@
         insert into store
         values (null, #{storeName}, #{storeNum}, #{storeAddress}, #{concat}, #{phone})
     </insert>
-
+    <!-- 修改仓库 -->
+    <update id="update">
+        update store
+        set store_name    = #{storeName},
+            store_address = #{storeAddress},
+            concat        = #{concat},
+            phone         = #{phone}
+        where store_id = #{storeId}
+    </update>
     <!-- 查询所有仓库 -->
     <select id="selectList" resultType="com.example.warehouse.entity.Store">
         select *

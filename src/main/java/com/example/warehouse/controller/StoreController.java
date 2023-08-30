@@ -39,4 +39,12 @@ public class StoreController {
     public Result storeAdd(@RequestBody Store store) {
         return storeService.insert(store);
     }
+
+    /**
+     * 仓库修改
+     */
+    @RequestMapping("/store-update")
+    public Result storeUpdate(@RequestBody Store store) {
+        return storeService.update(store);
+    }
 }

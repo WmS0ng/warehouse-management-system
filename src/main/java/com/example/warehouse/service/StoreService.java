@@ -32,4 +32,9 @@ public interface StoreService {
      * 添加仓库
      */
     Result insert(Store store);
+
+    /**
+     * 修改仓库
+     */
+    Result update(Store store);
 }
