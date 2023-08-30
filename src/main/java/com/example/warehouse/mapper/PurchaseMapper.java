@@ -1,6 +1,10 @@
 package com.example.warehouse.mapper;
 
 import com.example.warehouse.entity.Purchase;
+import com.example.warehouse.page.Page;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * @author swm
@@ -13,6 +17,16 @@ public interface PurchaseMapper {
      * 添加采购单
      */
     int insert(Purchase purchase);
+
+    /**
+     * 查询采购单的所有行数量
+     */
+    int countToTal(Purchase purchase);
+
+    /**
+     * 分页查询
+     */
+    List<Purchase> selectPage(@Param("page") Page page, @Param("purchase") Purchase purchase);
 }
 
 

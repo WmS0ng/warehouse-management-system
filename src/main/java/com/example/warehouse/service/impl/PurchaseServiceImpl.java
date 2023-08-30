@@ -2,10 +2,13 @@ package com.example.warehouse.service.impl;
 
 import com.example.warehouse.entity.Purchase;
 import com.example.warehouse.mapper.PurchaseMapper;
+import com.example.warehouse.page.Page;
 import com.example.warehouse.result.Result;
 import com.example.warehouse.service.PurchaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class PurchaseServiceImpl implements PurchaseService {
@@ -23,5 +26,17 @@ public class PurchaseServiceImpl implements PurchaseService {
             return Result.ok("采购单添加成功！");
         }
         return Result.err(Result.CODE_ERR_BUSINESS, "采购单添加失败！");
+    }
+
+    /**
+     * 分页查询
+     */
+    @Override
+    public Page selectPage(Page page, Purchase purchase) {
+        int count = purchaseMapper.countToTal(purchase);
+        List<Purchase> purchaseList = purchaseMapper.selectPage(page, purchase);
+        page.setTotalNum(count);
+        page.setResultList(purchaseList);
+        return page;
     }
 }

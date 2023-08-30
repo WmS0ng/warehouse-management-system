@@ -22,4 +22,9 @@ public class Purchase implements Serializable {
     private String buyUser;
     private String phone;
     private String isIn;
+    // 追加属性
+    private String startTime;
+    private String endTime;
+    private String storeName;
+    private String productName;
 }
