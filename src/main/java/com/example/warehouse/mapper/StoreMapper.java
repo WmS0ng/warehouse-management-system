@@ -1,6 +1,7 @@
 package com.example.warehouse.mapper;
 
 import com.example.warehouse.entity.Store;
+import com.example.warehouse.vo.StoreCountVo;
 
 import java.util.List;
 
@@ -16,8 +17,9 @@ public interface StoreMapper {
      * 查询所有仓库
      */
     List<Store> selectList();
+
+    /**
+     * 查询每个仓库的商品数量
+     */
+    List<StoreCountVo> selectStoreCount();
 }
-
-
-
-
