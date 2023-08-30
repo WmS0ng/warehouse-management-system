@@ -80,7 +80,7 @@ public class PurchaseController {
         inStore.setCreateBy(currentUser.getUserId());
         inStore.setStoreId(purchase.getStoreId());
         inStore.setProductId(purchase.getProductId());
-        inStore.setInNum(purchase.getBuyNum());
+        inStore.setInNum(purchase.getFactBuyNum());
         return inStoreService.insert(inStore, purchase.getBuyId());
     }
 }
