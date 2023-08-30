@@ -5,6 +5,7 @@ import com.example.warehouse.page.Page;
 import com.example.warehouse.result.Result;
 import com.example.warehouse.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,5 +30,13 @@ public class StoreController {
     @RequestMapping("/store-num-check")
     public Result storeNumCheck(String storeNum) {
         return storeService.storeNumCheck(storeNum);
+    }
+
+    /**
+     * 仓库添加
+     */
+    @RequestMapping("/store-add")
+    public Result storeAdd(@RequestBody Store store) {
+        return storeService.insert(store);
     }
 }

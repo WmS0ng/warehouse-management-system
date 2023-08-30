@@ -3,6 +3,11 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.warehouse.mapper.StoreMapper">
+    <!-- 添加仓库 -->
+    <insert id="insert">
+        insert into store
+        values (null, #{storeName}, #{storeNum}, #{storeAddress}, #{concat}, #{phone})
+    </insert>
 
     <!-- 查询所有仓库 -->
     <select id="selectList" resultType="com.example.warehouse.entity.Store">

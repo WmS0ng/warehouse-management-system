@@ -40,4 +40,8 @@ public interface StoreMapper {
      */
     Store selectByNum(String storeNum);
 
+    /**
+     * 添加仓库
+     */
+    int insert(Store store);
 }

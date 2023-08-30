@@ -27,4 +27,9 @@ public interface StoreService {
      * 检查仓库编号是否存在
      */
     Result storeNumCheck(String storeNum);
+
+    /**
+     * 添加仓库
+     */
+    Result insert(Store store);
 }

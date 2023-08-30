@@ -56,4 +56,16 @@ public class StoreServiceImpl implements StoreService {
         Store store = storeMapper.selectByNum(storeNum);
         return Result.ok(store == null);
     }
+
+    /**
+     * 添加仓库
+     */
+    @Override
+    public Result insert(Store store) {
+        int i = storeMapper.insert(store);
+        if (i > 0) {
+            return Result.ok("仓库添加成功！");
+        }
+        return Result.err(Result.CODE_ERR_BUSINESS, "仓库添加失败！");
+    }
 }
