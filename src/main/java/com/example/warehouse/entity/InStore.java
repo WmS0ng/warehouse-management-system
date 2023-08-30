@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -20,4 +21,11 @@ public class InStore implements Serializable {
     private Integer createBy;
     private Date createTime;
     private String isIn;
+    // 追加属性
+    private String productName;
+    private String storeName;
+    private BigDecimal inPrice;
+    private String userCode;
+    private String startTime;
+    private String endTime;
 }

@@ -1,6 +1,8 @@
 package com.example.warehouse.controller;
 
+import com.example.warehouse.entity.InStore;
 import com.example.warehouse.entity.Store;
+import com.example.warehouse.page.Page;
 import com.example.warehouse.result.Result;
 import com.example.warehouse.service.InStoreService;
 import com.example.warehouse.service.StoreService;
@@ -25,5 +27,14 @@ public class InStoreController {
     public Result storeList() {
         List<Store> storeList = storeService.selectList();
         return Result.ok(storeList);
+    }
+
+    /**
+     * 入库单的分页查询
+     */
+    @RequestMapping("/instore-page-list")
+    public Result instorePageList(Page page, InStore inStore) {
+        page = inStoreService.selectPage(page, inStore);
+        return Result.ok(page);
     }
 }

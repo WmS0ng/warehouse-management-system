@@ -3,11 +3,14 @@ package com.example.warehouse.service.impl;
 import com.example.warehouse.entity.InStore;
 import com.example.warehouse.mapper.InStoreMapper;
 import com.example.warehouse.mapper.PurchaseMapper;
+import com.example.warehouse.page.Page;
 import com.example.warehouse.result.Result;
 import com.example.warehouse.service.InStoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class InStoreServiceImpl implements InStoreService {
@@ -31,5 +34,17 @@ public class InStoreServiceImpl implements InStoreService {
             return Result.err(Result.CODE_ERR_BUSINESS, "入库单添加失败！");
         }
         return Result.err(Result.CODE_ERR_BUSINESS, "入库单添加失败！");
+    }
+
+    /**
+     * 分页查询入库单
+     */
+    @Override
+    public Page selectPage(Page page, InStore inStore) {
+        int count = inStoreMapper.countTotal(inStore);
+        List<InStore> inStoreList = inStoreMapper.selectPage(page, inStore);
+        page.setTotalNum(count);
+        page.setResultList(inStoreList);
+        return page;
     }
 }
