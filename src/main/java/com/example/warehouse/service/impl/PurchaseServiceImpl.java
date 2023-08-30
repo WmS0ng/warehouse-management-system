@@ -20,7 +20,7 @@ public class PurchaseServiceImpl implements PurchaseService {
      */
     @Override
     public Result insert(Purchase purchase) {
-        purchase.setFactBuyNum(purchase.getBuyNum());
+        // purchase.setFactBuyNum(purchase.getBuyNum());
         int i = purchaseMapper.insert(purchase);
         if (i > 0) {
             return Result.ok("采购单添加成功！");
