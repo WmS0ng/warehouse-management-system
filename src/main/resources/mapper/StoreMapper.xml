@@ -57,4 +57,10 @@
         order by store_id
         limit #{page.limitIndex}, #{page.pageSize}
     </select>
+    <!-- 根据编号查询 -->
+    <select id="selectByNum" resultType="com.example.warehouse.entity.Store">
+        select *
+        from store
+        where store_num = #{storeNum}
+    </select>
 </mapper>

@@ -34,4 +34,10 @@ public interface StoreMapper {
      * 分页查询仓库数量
      */
     List<Store> selectPage(@Param("page") Page page, @Param("store") Store store);
+
+    /**
+     * 根据编号查询
+     */
+    Store selectByNum(String storeNum);
+
 }

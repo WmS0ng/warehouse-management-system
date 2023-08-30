@@ -2,6 +2,7 @@ package com.example.warehouse.service;
 
 import com.example.warehouse.entity.Store;
 import com.example.warehouse.page.Page;
+import com.example.warehouse.result.Result;
 import com.example.warehouse.vo.StoreCountVo;
 
 import java.util.List;
@@ -21,4 +22,9 @@ public interface StoreService {
      * 分页查询仓库
      */
     Page selectPage(Page page, Store store);
+
+    /**
+     * 检查仓库编号是否存在
+     */
+    Result storeNumCheck(String storeNum);
 }

@@ -14,9 +14,20 @@ public class StoreController {
     @Autowired
     private StoreService storeService;
 
+    /**
+     * 仓库分页查询
+     */
     @RequestMapping("/store-page-list")
     public Result storePageList(Page page, Store store) {
         page = storeService.selectPage(page, store);
         return Result.ok(page);
+    }
+
+    /**
+     * 仓库编号检查
+     */
+    @RequestMapping("/store-num-check")
+    public Result storeNumCheck(String storeNum) {
+        return storeService.storeNumCheck(storeNum);
     }
 }

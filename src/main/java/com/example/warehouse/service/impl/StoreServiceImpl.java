@@ -3,6 +3,7 @@ package com.example.warehouse.service.impl;
 import com.example.warehouse.entity.Store;
 import com.example.warehouse.mapper.StoreMapper;
 import com.example.warehouse.page.Page;
+import com.example.warehouse.result.Result;
 import com.example.warehouse.service.StoreService;
 import com.example.warehouse.vo.StoreCountVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +46,14 @@ public class StoreServiceImpl implements StoreService {
         page.setTotalNum(count);
         page.setResultList(storeList);
         return page;
+    }
+
+    /**
+     * 查看仓库编号是否存在
+     */
+    @Override
+    public Result storeNumCheck(String storeNum) {
+        Store store = storeMapper.selectByNum(storeNum);
+        return Result.ok(store == null);
     }
 }
