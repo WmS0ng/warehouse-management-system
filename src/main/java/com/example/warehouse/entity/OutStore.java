@@ -25,4 +25,9 @@ public class OutStore implements Serializable {
     private String isOut;
     // 追加属性
     private BigDecimal salePrice;
+    private String productName;
+    private String storeName;
+    private String userCode;
+    private String startTime;
+    private String endTime;
 }

@@ -1,6 +1,10 @@
 package com.example.warehouse.mapper;
 
 import com.example.warehouse.entity.OutStore;
+import com.example.warehouse.page.Page;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * @author swm
@@ -13,6 +17,16 @@ public interface OutStoreMapper {
      * 添加出库单
      */
     int insert(OutStore outStore);
+
+    /**
+     * 查询出库总行数
+     */
+    int countTotal(OutStore outStore);
+
+    /**
+     * 分页查询出库单
+     */
+    List<OutStore> selectPage(@Param("page") Page page, @Param("outStore") OutStore outStore);
 }
 
 

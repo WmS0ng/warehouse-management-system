@@ -3,6 +3,7 @@ package com.example.warehouse.controller;
 import com.example.warehouse.dto.CurrentUser;
 import com.example.warehouse.entity.OutStore;
 import com.example.warehouse.entity.Store;
+import com.example.warehouse.page.Page;
 import com.example.warehouse.result.Result;
 import com.example.warehouse.service.OutStoreService;
 import com.example.warehouse.service.StoreService;
@@ -30,7 +31,7 @@ public class OutStoreController {
      * 添加出库单
      */
     @RequestMapping("/outstore-add")
-    public Result outstoreAdd(@RequestBody OutStore outStore, @RequestHeader(WarehouseConstants.HEADER_TOKEN_NAME) String token) {
+    public Result outStoreAdd(@RequestBody OutStore outStore, @RequestHeader(WarehouseConstants.HEADER_TOKEN_NAME) String token) {
         CurrentUser currentUser = tokenUtils.getCurrentUser(token);
         outStore.setCreateBy(currentUser.getUserId());
         return outStoreService.insert(outStore);
@@ -43,5 +44,14 @@ public class OutStoreController {
     public Result storeList() {
         List<Store> storeList = storeService.selectList();
         return Result.ok(storeList);
+    }
+
+    /**
+     * 分页查询出库单
+     */
+    @RequestMapping("/outstore-page-list")
+    public Result outStorePageList(Page page, OutStore outStore) {
+        page = outStoreService.selectPage(page, outStore);
+        return Result.ok(page);
     }
 }

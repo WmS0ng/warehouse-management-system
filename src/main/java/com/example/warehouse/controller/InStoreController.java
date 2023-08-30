@@ -34,7 +34,7 @@ public class InStoreController {
      * 入库单的分页查询
      */
     @RequestMapping("/instore-page-list")
-    public Result instorePageList(Page page, InStore inStore) {
+    public Result inStorePageList(Page page, InStore inStore) {
         page = inStoreService.selectPage(page, inStore);
         return Result.ok(page);
     }
@@ -43,7 +43,7 @@ public class InStoreController {
      * 确认入库
      */
     @RequestMapping("/instore-confirm")
-    public Result instoreConfirm(@RequestBody InStore inStore) {
+    public Result inStoreConfirm(@RequestBody InStore inStore) {
         return inStoreService.inStoreConfirm(inStore);
     }
 }
