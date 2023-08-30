@@ -152,4 +152,10 @@
         from product
         where product_num = #{productNum}
     </select>
+    <!-- 根据商品id查询库存 -->
+    <select id="selectInventById" resultType="java.lang.Integer">
+        select product_invent
+        from product
+        where product_id = #{productId}
+    </select>
 </mapper>

@@ -54,4 +54,12 @@ public class OutStoreController {
         page = outStoreService.selectPage(page, outStore);
         return Result.ok(page);
     }
+
+    /**
+     * 确认出库
+     */
+    @RequestMapping("/outstore-confirm")
+    public Result outStoreConfirm(@RequestBody OutStore outStore) {
+        return outStoreService.outStoreConfirm(outStore);
+    }
 }

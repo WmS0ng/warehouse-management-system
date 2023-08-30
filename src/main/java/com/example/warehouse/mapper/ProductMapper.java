@@ -52,6 +52,11 @@ public interface ProductMapper {
      * 修改商品表库存
      */
     int updateInvent(@Param("productId") Integer productId, @Param("invent") Integer invent);
+
+    /**
+     * 根据商品id查询库存的方法
+     */
+    int selectInventById(Integer productId);
 }
 
 

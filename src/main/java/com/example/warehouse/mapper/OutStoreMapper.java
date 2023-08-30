@@ -27,6 +27,11 @@ public interface OutStoreMapper {
      * 分页查询出库单
      */
     List<OutStore> selectPage(@Param("page") Page page, @Param("outStore") OutStore outStore);
+
+    /**
+     * 修改出库单状态为已出库
+     */
+    int updateIsOut(Integer outStoreId);
 }
 
 

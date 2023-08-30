@@ -14,4 +14,9 @@ public interface OutStoreService {
      * 分页查询出库单
      */
     Page selectPage(Page page, OutStore outStore);
+
+    /**
+     * 确认出库
+     */
+    Result outStoreConfirm(OutStore outStore);
 }

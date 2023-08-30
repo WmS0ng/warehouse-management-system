@@ -30,6 +30,12 @@
             and t1.create_time &lt;= #{endTime}
         </if>
     </update>
+    <!-- 修改出库单状态为已出库 -->
+    <update id="updateIsOut">
+        update out_store
+        set is_out = 1
+        where outs_id = #{outStoreId}
+    </update>
     <!-- 分页查询出库单 -->
     <select id="selectPage" resultType="com.example.warehouse.entity.OutStore">
         select t1.*, t2.product_name, t3.store_name, t4.user_code

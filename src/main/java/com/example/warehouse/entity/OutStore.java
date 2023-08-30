@@ -1,5 +1,6 @@
 package com.example.warehouse.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.io.Serial;
@@ -21,6 +22,7 @@ public class OutStore implements Serializable {
     private BigDecimal outPrice;
     private Integer outNum;
     private Integer createBy;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
     private String isOut;
     // 追加属性
