@@ -9,6 +9,12 @@
         values (null, #{productId}, #{storeId}, #{buyNum}, #{factBuyNum}, now(), #{supplyId}, #{placeId}, #{buyUser},
                 #{phone}, 0)
     </insert>
+    <!-- 根据id删除采购单 -->
+    <delete id="deleteById">
+        delete
+        from buy_list
+        where buy_id = #{buyId}
+    </delete>
     <!-- 查询采购单所有行的数量 -->
     <select id="countToTal" resultType="java.lang.Integer">
         select count(*)

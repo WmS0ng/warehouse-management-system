@@ -14,4 +14,9 @@ public interface PurchaseService {
      * 分页查询采购单
      */
     Page selectPage(Page page, Purchase purchase);
+
+    /**
+     * 删除采购单
+     */
+    Result deleteById(Integer buyId);
 }

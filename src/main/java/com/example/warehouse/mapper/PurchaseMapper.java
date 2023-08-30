@@ -27,6 +27,11 @@ public interface PurchaseMapper {
      * 分页查询
      */
     List<Purchase> selectPage(@Param("page") Page page, @Param("purchase") Purchase purchase);
+
+    /**
+     * 根据id删除采购单
+     */
+    int deleteById(Integer buyId);
 }
 
 

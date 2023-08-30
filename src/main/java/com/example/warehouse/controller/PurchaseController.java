@@ -7,6 +7,7 @@ import com.example.warehouse.result.Result;
 import com.example.warehouse.service.PurchaseService;
 import com.example.warehouse.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,5 +46,13 @@ public class PurchaseController {
     public Result purchasePageList(Page page, Purchase purchase) {
         page = purchaseService.selectPage(page, purchase);
         return Result.ok(page);
+    }
+
+    /**
+     * 删除采购单
+     */
+    @RequestMapping("/purchase-delete/{buyId}")
+    public Result purchaseDelete(@PathVariable Integer buyId) {
+        return purchaseService.deleteById(buyId);
     }
 }
