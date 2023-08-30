@@ -17,6 +17,12 @@
             phone         = #{phone}
         where store_id = #{storeId}
     </update>
+    <!-- 根据id删除仓库 -->
+    <delete id="deleteById">
+        delete
+        from store
+        where store_id = #{storeId}
+    </delete>
     <!-- 查询所有仓库 -->
     <select id="selectList" resultType="com.example.warehouse.entity.Store">
         select *

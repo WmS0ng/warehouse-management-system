@@ -49,4 +49,9 @@ public interface StoreMapper {
      * 修改仓库
      */
     int update(Store store);
+
+    /**
+     * 根据id删除仓库
+     */
+    int deleteById(Integer storeId);
 }

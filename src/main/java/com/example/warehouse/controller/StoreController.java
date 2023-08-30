@@ -5,6 +5,7 @@ import com.example.warehouse.page.Page;
 import com.example.warehouse.result.Result;
 import com.example.warehouse.service.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -46,5 +47,13 @@ public class StoreController {
     @RequestMapping("/store-update")
     public Result storeUpdate(@RequestBody Store store) {
         return storeService.update(store);
+    }
+
+    /**
+     * 删除仓库
+     */
+    @RequestMapping("/store-delete/{storeId}")
+    public Result storeDelete(@PathVariable Integer storeId) {
+        return storeService.deleteById(storeId);
     }
 }

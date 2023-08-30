@@ -37,4 +37,9 @@ public interface StoreService {
      * 修改仓库
      */
     Result update(Store store);
+
+    /**
+     * 根据id删除仓库
+     */
+    Result deleteById(Integer storeId);
 }

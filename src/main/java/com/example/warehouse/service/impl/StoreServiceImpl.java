@@ -83,4 +83,17 @@ public class StoreServiceImpl implements StoreService {
         }
         return Result.err(Result.CODE_ERR_BUSINESS, "仓库修改失败！");
     }
+
+    /**
+     * 根据id删除仓库
+     */
+    @Override
+    @CacheEvict(key = "'all:store'")
+    public Result deleteById(Integer storeId) {
+        int i = storeMapper.deleteById(storeId);
+        if (i > 0) {
+            return Result.ok("仓库删除成功！");
+        }
+        return Result.err(Result.CODE_ERR_BUSINESS, "仓库删除失败！");
+    }
 }
