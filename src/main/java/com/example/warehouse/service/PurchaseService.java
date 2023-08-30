@@ -19,4 +19,9 @@ public interface PurchaseService {
      * 删除采购单
      */
     Result deleteById(Integer buyId);
+
+    /**
+     * 修改采购单的采购数量
+     */
+    Result updateNum(Purchase purchase);
 }

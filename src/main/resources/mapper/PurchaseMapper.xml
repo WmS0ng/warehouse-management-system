@@ -9,6 +9,13 @@
         values (null, #{productId}, #{storeId}, #{buyNum}, #{factBuyNum}, now(), #{supplyId}, #{placeId}, #{buyUser},
                 #{phone}, 0)
     </insert>
+    <!-- 根据id修改预计采购数量和实际采购数量 -->
+    <update id="updateNum">
+        update buy_list
+        set buy_num      = #{buyNum},
+            fact_buy_num = #{factBuyNum}
+        where buy_id = #{buyId}
+    </update>
     <!-- 根据id删除采购单 -->
     <delete id="deleteById">
         delete

@@ -55,4 +55,12 @@ public class PurchaseController {
     public Result purchaseDelete(@PathVariable Integer buyId) {
         return purchaseService.deleteById(buyId);
     }
+
+    /**
+     * 修改采购单
+     */
+    @RequestMapping("/purchase-update")
+    public Result purchaseUpdate(@RequestBody Purchase purchase) {
+        return purchaseService.updateNum(purchase);
+    }
 }

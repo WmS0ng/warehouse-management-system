@@ -51,4 +51,16 @@ public class PurchaseServiceImpl implements PurchaseService {
         }
         return Result.err(Result.CODE_ERR_BUSINESS, "采购单删除失败！");
     }
+
+    /**
+     * 修改采购单的采购数量
+     */
+    @Override
+    public Result updateNum(Purchase purchase) {
+        int i = purchaseMapper.updateNum(purchase);
+        if (i > 0) {
+            return Result.ok("修改采购单成功！");
+        }
+        return Result.err(Result.CODE_ERR_BUSINESS, "修改采购单失败");
+    }
 }
