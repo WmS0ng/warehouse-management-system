@@ -23,5 +23,3 @@ RBAC:用户角色权限控制
 # 项目技术
 
 SpringBoot + MyBatis + MySql + Redis + Vue3 + Axios + Element-Plus + Echarts
-
-# 个人职责
