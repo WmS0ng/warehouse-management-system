@@ -1,11 +1,11 @@
 package com.example.warehouse.entity;
 
-import lombok.Data;
-
 import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
+import lombok.Data;
 
 /**
  * 权限表

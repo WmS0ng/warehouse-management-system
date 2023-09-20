@@ -1,10 +1,8 @@
 package com.example.warehouse.service.impl;
 
-import com.alibaba.fastjson2.JSON;
-import com.example.warehouse.entity.Auth;
-import com.example.warehouse.mapper.AuthMapper;
-import com.example.warehouse.mapper.RoleAuthMapper;
-import com.example.warehouse.service.AuthService;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
@@ -12,8 +10,11 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.alibaba.fastjson2.JSON;
+import com.example.warehouse.entity.Auth;
+import com.example.warehouse.mapper.AuthMapper;
+import com.example.warehouse.mapper.RoleAuthMapper;
+import com.example.warehouse.service.AuthService;
 
 @Service
 @CacheConfig(cacheNames = "com.example.warehouse.service.impl.AuthServiceImpl")
